@@ -6,6 +6,7 @@ import {
   getDaftraConfig,
   listAuditLog,
   listDaftraTools,
+  testDaftraConnection,
 } from "@/lib/daftra/daftra.functions";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
