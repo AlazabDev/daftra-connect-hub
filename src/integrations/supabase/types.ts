@@ -143,6 +143,51 @@ export type Database = {
           },
         ]
       }
+      daftra_audit_log: {
+        Row: {
+          actor: string | null
+          created_at: string
+          duration_ms: number | null
+          error: string | null
+          id: string
+          meta: Json | null
+          method: string | null
+          ok: boolean
+          path: string | null
+          status: number | null
+          tool: string
+          version: string | null
+        }
+        Insert: {
+          actor?: string | null
+          created_at?: string
+          duration_ms?: number | null
+          error?: string | null
+          id?: string
+          meta?: Json | null
+          method?: string | null
+          ok?: boolean
+          path?: string | null
+          status?: number | null
+          tool: string
+          version?: string | null
+        }
+        Update: {
+          actor?: string | null
+          created_at?: string
+          duration_ms?: number | null
+          error?: string | null
+          id?: string
+          meta?: Json | null
+          method?: string | null
+          ok?: boolean
+          path?: string | null
+          status?: number | null
+          tool?: string
+          version?: string | null
+        }
+        Relationships: []
+      }
       images: {
         Row: {
           created_at: string

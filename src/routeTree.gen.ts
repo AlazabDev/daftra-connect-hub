@@ -10,33 +10,43 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ApiPublicDaftraMcpRouteImport } from './routes/api/public/daftra-mcp'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicDaftraMcpRoute = ApiPublicDaftraMcpRouteImport.update({
+  id: '/api/public/daftra-mcp',
+  path: '/api/public/daftra-mcp',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/api/public/daftra-mcp': typeof ApiPublicDaftraMcpRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/api/public/daftra-mcp': typeof ApiPublicDaftraMcpRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/api/public/daftra-mcp': typeof ApiPublicDaftraMcpRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/api/public/daftra-mcp'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/api/public/daftra-mcp'
+  id: '__root__' | '/' | '/api/public/daftra-mcp'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ApiPublicDaftraMcpRoute: typeof ApiPublicDaftraMcpRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,22 +58,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/daftra-mcp': {
+      id: '/api/public/daftra-mcp'
+      path: '/api/public/daftra-mcp'
+      fullPath: '/api/public/daftra-mcp'
+      preLoaderRoute: typeof ApiPublicDaftraMcpRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ApiPublicDaftraMcpRoute: ApiPublicDaftraMcpRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
