@@ -63,6 +63,21 @@ function Dashboard() {
   const [loading, setLoading] = useState(false);
   const [audit, setAudit] = useState<Array<Record<string, unknown>>>([]);
   const [filter, setFilter] = useState("");
+  const [testResult, setTestResult] = useState<null | Awaited<ReturnType<typeof testDaftraConnection>>>(null);
+  const [testing, setTesting] = useState(false);
+
+  async function runTest() {
+    setTesting(true);
+    setTestResult(null);
+    try {
+      const r = await testFn({ data: { alazabKey } });
+      setTestResult(r);
+    } catch (e) {
+      setTestResult({ ok: false, alazab: { configured: false, matches: false }, config: { subdomain: null, hasApiKey: false, hasClientId: false, hasClientSecret: false }, checks: [], error: e instanceof Error ? e.message : String(e) } as never);
+    } finally {
+      setTesting(false);
+    }
+  }
 
   useEffect(() => {
     void cfgFn({}).then(setCfg);
