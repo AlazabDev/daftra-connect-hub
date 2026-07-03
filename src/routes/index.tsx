@@ -48,7 +48,7 @@ function Dashboard() {
   const cfgFn = useServerFn(getDaftraConfig);
   const toolsFn = useServerFn(listDaftraTools);
   const callFn = useServerFn(callDaftraTool);
-  const auditFn = useServerFn(listAuditLog);
+  const testFn = useServerFn(testDaftraConnection);
 
   const [cfg, setCfg] = useState<{ subdomain: string; hasApiKey: boolean; hasClientId: boolean; hasClientSecret: boolean; hasPrivateKey: boolean } | null>(null);
   const [tools, setTools] = useState<ToolDef[]>([]);
