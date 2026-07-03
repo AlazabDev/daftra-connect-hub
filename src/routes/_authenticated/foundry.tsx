@@ -101,7 +101,10 @@ function FoundryPage() {
               نقطة MCP موحدة لوكلاء Azure AI Foundry: تسجيل، مراسلة، وأدوات دفترة كاملة.
             </p>
           </div>
-          <Link to="/" className="text-sm underline text-muted-foreground">← لوحة Daftra</Link>
+          <div className="flex gap-3 text-sm">
+            <Link to="/azure" className="underline text-muted-foreground">Azure Foundry →</Link>
+            <Link to="/" className="underline text-muted-foreground">← لوحة Daftra</Link>
+          </div>
         </div>
 
         <Card>
