@@ -1,4 +1,5 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { supabase } from "@/integrations/supabase/client";
 import { useEffect, useMemo, useState } from "react";
 import { useServerFn } from "@tanstack/react-start";
 import {
@@ -150,6 +151,7 @@ function Dashboard() {
             <Badge variant={cfg?.subdomain ? "default" : "destructive"}>
               {cfg?.subdomain ? `${cfg.subdomain}.daftra.com` : "لا يوجد subdomain"}
             </Badge>
+            <SignOutButton />
           </div>
         </div>
       </header>
