@@ -187,6 +187,57 @@ function Dashboard() {
                     يجب أن يطابق قيمة ALAZAB_MCP_PRIVATE_KEY الموجودة على الخادم لتنفيذ أي أداة.
                   </p>
                 </div>
+
+                <div className="border-t border-border pt-4">
+                  <div className="flex items-center gap-3 flex-wrap">
+                    <Button onClick={runTest} disabled={testing || !alazabKey}>
+                      {testing ? "جاري الاختبار…" : "اختبار الاتصال"}
+                    </Button>
+                    {!alazabKey && <span className="text-xs text-rose-500">أدخل مفتاح العزب أولاً</span>}
+                    {testResult && (
+                      <Badge variant={testResult.ok ? "default" : "destructive"}>
+                        {testResult.ok ? "نجح على الأقل وضع واحد" : "فشل"}
+                      </Badge>
+                    )}
+                  </div>
+
+                  {testResult && (
+                    <div className="mt-4 space-y-3">
+                      <div className="rounded-md border border-border p-3 text-sm">
+                        <div className="flex items-center justify-between">
+                          <span className="font-medium">X-Alazab-Key</span>
+                          <Badge variant={testResult.alazab.matches ? "default" : "destructive"}>
+                            {testResult.alazab.matches ? "✓ مطابق" : testResult.alazab.configured ? "✗ غير مطابق" : "✗ غير مضبوط على الخادم"}
+                          </Badge>
+                        </div>
+                        {"error" in testResult && testResult.error && (
+                          <p className="text-xs text-rose-500 mt-2">{testResult.error}</p>
+                        )}
+                      </div>
+
+                      {testResult.checks?.map((c) => (
+                        <div key={c.mode} className="rounded-md border border-border p-3 text-sm">
+                          <div className="flex items-center justify-between gap-2">
+                            <div className="flex items-center gap-2">
+                              <Badge variant="outline" className="font-mono">{c.mode}</Badge>
+                              <span className={c.ok ? "text-emerald-600" : "text-rose-600"}>
+                                {c.ok ? "✓" : "✗"} {c.message}
+                              </span>
+                            </div>
+                            <div className="text-xs text-muted-foreground">
+                              HTTP {c.status} · {c.duration_ms}ms
+                            </div>
+                          </div>
+                          {c.detail && (
+                            <pre className="mt-2 text-[11px] bg-muted p-2 rounded overflow-auto max-h-32" dir="ltr">
+{c.detail}
+                            </pre>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
               </CardContent>
             </Card>
           </TabsContent>
