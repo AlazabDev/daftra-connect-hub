@@ -45,6 +45,22 @@ const permColors: Record<string, string> = {
   delete: "bg-rose-500/15 text-rose-700 dark:text-rose-400",
 };
 
+function SignOutButton() {
+  const navigate = useNavigate();
+  return (
+    <Button
+      variant="outline"
+      size="sm"
+      onClick={async () => {
+        await supabase.auth.signOut();
+        navigate({ to: "/auth", replace: true });
+      }}
+    >
+      تسجيل الخروج
+    </Button>
+  );
+}
+
 function Dashboard() {
   const cfgFn = useServerFn(getDaftraConfig);
   const toolsFn = useServerFn(listDaftraTools);
