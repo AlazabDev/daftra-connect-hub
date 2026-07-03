@@ -12,6 +12,8 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AuthenticatedIndexRouteImport } from './routes/_authenticated/index'
+import { Route as AuthenticatedFoundryRouteImport } from './routes/_authenticated/foundry'
+import { Route as ApiPublicFoundryMcpRouteImport } from './routes/api/public/foundry-mcp'
 import { Route as ApiPublicDaftraMcpRouteImport } from './routes/api/public/daftra-mcp'
 
 const AuthRoute = AuthRouteImport.update({
@@ -28,6 +30,16 @@ const AuthenticatedIndexRoute = AuthenticatedIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedFoundryRoute = AuthenticatedFoundryRouteImport.update({
+  id: '/foundry',
+  path: '/foundry',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const ApiPublicFoundryMcpRoute = ApiPublicFoundryMcpRouteImport.update({
+  id: '/api/public/foundry-mcp',
+  path: '/api/public/foundry-mcp',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiPublicDaftraMcpRoute = ApiPublicDaftraMcpRouteImport.update({
   id: '/api/public/daftra-mcp',
   path: '/api/public/daftra-mcp',
@@ -37,37 +49,56 @@ const ApiPublicDaftraMcpRoute = ApiPublicDaftraMcpRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof AuthenticatedIndexRoute
   '/auth': typeof AuthRoute
+  '/foundry': typeof AuthenticatedFoundryRoute
   '/api/public/daftra-mcp': typeof ApiPublicDaftraMcpRoute
+  '/api/public/foundry-mcp': typeof ApiPublicFoundryMcpRoute
 }
 export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
+  '/foundry': typeof AuthenticatedFoundryRoute
   '/': typeof AuthenticatedIndexRoute
   '/api/public/daftra-mcp': typeof ApiPublicDaftraMcpRoute
+  '/api/public/foundry-mcp': typeof ApiPublicFoundryMcpRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
+  '/_authenticated/foundry': typeof AuthenticatedFoundryRoute
   '/_authenticated/': typeof AuthenticatedIndexRoute
   '/api/public/daftra-mcp': typeof ApiPublicDaftraMcpRoute
+  '/api/public/foundry-mcp': typeof ApiPublicFoundryMcpRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth' | '/api/public/daftra-mcp'
+  fullPaths:
+    | '/'
+    | '/auth'
+    | '/foundry'
+    | '/api/public/daftra-mcp'
+    | '/api/public/foundry-mcp'
   fileRoutesByTo: FileRoutesByTo
-  to: '/auth' | '/' | '/api/public/daftra-mcp'
+  to:
+    | '/auth'
+    | '/foundry'
+    | '/'
+    | '/api/public/daftra-mcp'
+    | '/api/public/foundry-mcp'
   id:
     | '__root__'
     | '/_authenticated'
     | '/auth'
+    | '/_authenticated/foundry'
     | '/_authenticated/'
     | '/api/public/daftra-mcp'
+    | '/api/public/foundry-mcp'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AuthRoute: typeof AuthRoute
   ApiPublicDaftraMcpRoute: typeof ApiPublicDaftraMcpRoute
+  ApiPublicFoundryMcpRoute: typeof ApiPublicFoundryMcpRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -93,6 +124,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedIndexRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/foundry': {
+      id: '/_authenticated/foundry'
+      path: '/foundry'
+      fullPath: '/foundry'
+      preLoaderRoute: typeof AuthenticatedFoundryRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/api/public/foundry-mcp': {
+      id: '/api/public/foundry-mcp'
+      path: '/api/public/foundry-mcp'
+      fullPath: '/api/public/foundry-mcp'
+      preLoaderRoute: typeof ApiPublicFoundryMcpRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/daftra-mcp': {
       id: '/api/public/daftra-mcp'
       path: '/api/public/daftra-mcp'
@@ -104,10 +149,12 @@ declare module '@tanstack/react-router' {
 }
 
 interface AuthenticatedRouteRouteChildren {
+  AuthenticatedFoundryRoute: typeof AuthenticatedFoundryRoute
   AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedFoundryRoute: AuthenticatedFoundryRoute,
   AuthenticatedIndexRoute: AuthenticatedIndexRoute,
 }
 
@@ -118,6 +165,7 @@ const rootRouteChildren: RootRouteChildren = {
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AuthRoute: AuthRoute,
   ApiPublicDaftraMcpRoute: ApiPublicDaftraMcpRoute,
+  ApiPublicFoundryMcpRoute: ApiPublicFoundryMcpRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

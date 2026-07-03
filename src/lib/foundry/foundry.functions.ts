@@ -22,7 +22,8 @@ function randomToken(): string {
 
 // ---- A2A protocol primitives shared with the public MCP endpoint ----
 
-export type A2AResult = { ok: boolean; error?: string; data?: unknown };
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type A2AResult = { ok: boolean; error?: string; data?: any };
 
 export async function a2aRegisterAgent(input: {
   agent_id: string;
@@ -89,14 +90,16 @@ export async function a2aSendMessage(input: {
   const sb = await admin();
   const { data: dest } = await sb.from("foundry_agents").select("agent_id").eq("agent_id", input.to_agent).eq("active", true).maybeSingle();
   if (!dest) return { ok: false, error: `الوكيل المستقبل غير موجود: ${input.to_agent}` };
-  const row: Record<string, unknown> = {
+  const row = {
     from_agent: input.from_agent,
     to_agent: input.to_agent,
     role: input.role ?? "message",
-    content: input.content ?? {},
-    metadata: input.metadata ?? {},
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    content: (input.content ?? {}) as any,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    metadata: (input.metadata ?? {}) as any,
+    ...(input.thread_id ? { thread_id: input.thread_id } : {}),
   };
-  if (input.thread_id) row.thread_id = input.thread_id;
   const { data, error } = await sb.from("foundry_messages").insert(row).select("id, thread_id, created_at").single();
   if (error) return { ok: false, error: error.message };
   return { ok: true, data };
