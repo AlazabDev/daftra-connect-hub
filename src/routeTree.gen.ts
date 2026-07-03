@@ -13,6 +13,7 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AuthenticatedIndexRouteImport } from './routes/_authenticated/index'
 import { Route as AuthenticatedFoundryRouteImport } from './routes/_authenticated/foundry'
+import { Route as AuthenticatedAzureRouteImport } from './routes/_authenticated/azure'
 import { Route as ApiPublicFoundryMcpRouteImport } from './routes/api/public/foundry-mcp'
 import { Route as ApiPublicDaftraMcpRouteImport } from './routes/api/public/daftra-mcp'
 
@@ -35,6 +36,11 @@ const AuthenticatedFoundryRoute = AuthenticatedFoundryRouteImport.update({
   path: '/foundry',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedAzureRoute = AuthenticatedAzureRouteImport.update({
+  id: '/azure',
+  path: '/azure',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const ApiPublicFoundryMcpRoute = ApiPublicFoundryMcpRouteImport.update({
   id: '/api/public/foundry-mcp',
   path: '/api/public/foundry-mcp',
@@ -49,12 +55,14 @@ const ApiPublicDaftraMcpRoute = ApiPublicDaftraMcpRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof AuthenticatedIndexRoute
   '/auth': typeof AuthRoute
+  '/azure': typeof AuthenticatedAzureRoute
   '/foundry': typeof AuthenticatedFoundryRoute
   '/api/public/daftra-mcp': typeof ApiPublicDaftraMcpRoute
   '/api/public/foundry-mcp': typeof ApiPublicFoundryMcpRoute
 }
 export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
+  '/azure': typeof AuthenticatedAzureRoute
   '/foundry': typeof AuthenticatedFoundryRoute
   '/': typeof AuthenticatedIndexRoute
   '/api/public/daftra-mcp': typeof ApiPublicDaftraMcpRoute
@@ -64,6 +72,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
+  '/_authenticated/azure': typeof AuthenticatedAzureRoute
   '/_authenticated/foundry': typeof AuthenticatedFoundryRoute
   '/_authenticated/': typeof AuthenticatedIndexRoute
   '/api/public/daftra-mcp': typeof ApiPublicDaftraMcpRoute
@@ -74,12 +83,14 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/auth'
+    | '/azure'
     | '/foundry'
     | '/api/public/daftra-mcp'
     | '/api/public/foundry-mcp'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/auth'
+    | '/azure'
     | '/foundry'
     | '/'
     | '/api/public/daftra-mcp'
@@ -88,6 +99,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/_authenticated'
     | '/auth'
+    | '/_authenticated/azure'
     | '/_authenticated/foundry'
     | '/_authenticated/'
     | '/api/public/daftra-mcp'
@@ -131,6 +143,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedFoundryRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/azure': {
+      id: '/_authenticated/azure'
+      path: '/azure'
+      fullPath: '/azure'
+      preLoaderRoute: typeof AuthenticatedAzureRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/api/public/foundry-mcp': {
       id: '/api/public/foundry-mcp'
       path: '/api/public/foundry-mcp'
@@ -149,11 +168,13 @@ declare module '@tanstack/react-router' {
 }
 
 interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAzureRoute: typeof AuthenticatedAzureRoute
   AuthenticatedFoundryRoute: typeof AuthenticatedFoundryRoute
   AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAzureRoute: AuthenticatedAzureRoute,
   AuthenticatedFoundryRoute: AuthenticatedFoundryRoute,
   AuthenticatedIndexRoute: AuthenticatedIndexRoute,
 }
