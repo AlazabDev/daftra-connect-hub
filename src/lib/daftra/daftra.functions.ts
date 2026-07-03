@@ -45,7 +45,8 @@ type CallInput = {
 
 export const callDaftraTool = createServerFn({ method: "POST" })
   .inputValidator((data: CallInput) => data)
-  .handler(async ({ data }): Promise<{ ok: boolean; error?: string | null; status?: number; duration_ms?: number; data?: unknown; url?: string }> => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  .handler(async ({ data }): Promise<any> => {
     // 1. Alazab private key guard
     const expectedKey = process.env.ALAZAB_MCP_PRIVATE_KEY;
     if (!expectedKey) {
