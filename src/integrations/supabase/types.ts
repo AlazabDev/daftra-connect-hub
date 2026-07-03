@@ -188,6 +188,87 @@ export type Database = {
         }
         Relationships: []
       }
+      foundry_agents: {
+        Row: {
+          active: boolean
+          agent_id: string
+          capabilities: Json
+          created_at: string
+          description: string | null
+          id: string
+          last_seen_at: string | null
+          name: string
+          owner_user_id: string | null
+          token_hash: string
+          updated_at: string
+        }
+        Insert: {
+          active?: boolean
+          agent_id: string
+          capabilities?: Json
+          created_at?: string
+          description?: string | null
+          id?: string
+          last_seen_at?: string | null
+          name: string
+          owner_user_id?: string | null
+          token_hash: string
+          updated_at?: string
+        }
+        Update: {
+          active?: boolean
+          agent_id?: string
+          capabilities?: Json
+          created_at?: string
+          description?: string | null
+          id?: string
+          last_seen_at?: string | null
+          name?: string
+          owner_user_id?: string | null
+          token_hash?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      foundry_messages: {
+        Row: {
+          acked_at: string | null
+          content: Json
+          created_at: string
+          delivered_at: string | null
+          from_agent: string
+          id: string
+          metadata: Json
+          role: string
+          thread_id: string
+          to_agent: string
+        }
+        Insert: {
+          acked_at?: string | null
+          content: Json
+          created_at?: string
+          delivered_at?: string | null
+          from_agent: string
+          id?: string
+          metadata?: Json
+          role?: string
+          thread_id?: string
+          to_agent: string
+        }
+        Update: {
+          acked_at?: string | null
+          content?: Json
+          created_at?: string
+          delivered_at?: string | null
+          from_agent?: string
+          id?: string
+          metadata?: Json
+          role?: string
+          thread_id?: string
+          to_agent?: string
+        }
+        Relationships: []
+      }
       images: {
         Row: {
           created_at: string
