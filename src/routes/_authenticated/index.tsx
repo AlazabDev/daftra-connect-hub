@@ -1,4 +1,5 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { supabase } from "@/integrations/supabase/client";
 import { useEffect, useMemo, useState } from "react";
 import { useServerFn } from "@tanstack/react-start";
 import {
@@ -17,7 +18,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
-export const Route = createFileRoute("/")({
+export const Route = createFileRoute("/_authenticated/")({
   head: () => ({
     meta: [
       { title: "Daftra MCP — لوحة تحكم العزب" },
@@ -43,6 +44,22 @@ const permColors: Record<string, string> = {
   write: "bg-amber-500/15 text-amber-700 dark:text-amber-400",
   delete: "bg-rose-500/15 text-rose-700 dark:text-rose-400",
 };
+
+function SignOutButton() {
+  const navigate = useNavigate();
+  return (
+    <Button
+      variant="outline"
+      size="sm"
+      onClick={async () => {
+        await supabase.auth.signOut();
+        navigate({ to: "/auth", replace: true });
+      }}
+    >
+      تسجيل الخروج
+    </Button>
+  );
+}
 
 function Dashboard() {
   const cfgFn = useServerFn(getDaftraConfig);
@@ -150,6 +167,7 @@ function Dashboard() {
             <Badge variant={cfg?.subdomain ? "default" : "destructive"}>
               {cfg?.subdomain ? `${cfg.subdomain}.daftra.com` : "لا يوجد subdomain"}
             </Badge>
+            <SignOutButton />
           </div>
         </div>
       </header>
