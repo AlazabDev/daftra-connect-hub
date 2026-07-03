@@ -9,11 +9,11 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedIndexRouteImport } from './routes/_authenticated/index'
 import { Route as ApiPublicDaftraMcpRouteImport } from './routes/api/public/daftra-mcp'
 
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
+const AuthenticatedIndexRoute = AuthenticatedIndexRouteImport.update({
+  id: '/_authenticated/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
@@ -24,16 +24,16 @@ const ApiPublicDaftraMcpRoute = ApiPublicDaftraMcpRouteImport.update({
 } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
+  '/': typeof AuthenticatedIndexRoute
   '/api/public/daftra-mcp': typeof ApiPublicDaftraMcpRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
+  '/': typeof AuthenticatedIndexRoute
   '/api/public/daftra-mcp': typeof ApiPublicDaftraMcpRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
+  '/_authenticated/': typeof AuthenticatedIndexRoute
   '/api/public/daftra-mcp': typeof ApiPublicDaftraMcpRoute
 }
 export interface FileRouteTypes {
@@ -41,21 +41,21 @@ export interface FileRouteTypes {
   fullPaths: '/' | '/api/public/daftra-mcp'
   fileRoutesByTo: FileRoutesByTo
   to: '/' | '/api/public/daftra-mcp'
-  id: '__root__' | '/' | '/api/public/daftra-mcp'
+  id: '__root__' | '/_authenticated/' | '/api/public/daftra-mcp'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
+  AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute
   ApiPublicDaftraMcpRoute: typeof ApiPublicDaftraMcpRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
+    '/_authenticated/': {
+      id: '/_authenticated/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+      preLoaderRoute: typeof AuthenticatedIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/public/daftra-mcp': {
@@ -69,19 +69,9 @@ declare module '@tanstack/react-router' {
 }
 
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
+  AuthenticatedIndexRoute: AuthenticatedIndexRoute,
   ApiPublicDaftraMcpRoute: ApiPublicDaftraMcpRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
