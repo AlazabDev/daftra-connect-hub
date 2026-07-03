@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { createServerFn } from "@tanstack/react-start";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 
@@ -60,7 +61,7 @@ async function azureGet(url: string, scope?: string): Promise<{ ok: boolean; sta
     const headers = await authHeaders(scope);
     const res = await fetch(url, { headers: { ...headers, Accept: "application/json" } });
     const text = await res.text();
-    let data: unknown = undefined;
+    let data: any = undefined;
     try { data = text ? JSON.parse(text) : undefined; } catch { data = text; }
     if (!res.ok) return { ok: false, status: res.status, error: typeof data === "string" ? data : JSON.stringify(data) };
     return { ok: true, status: res.status, data };
@@ -76,8 +77,8 @@ export const azureListAgents = createServerFn({ method: "GET" })
   .handler(async () => {
     const url = `${endpoint()}/assistants?api-version=${AGENTS_API_VERSION}`;
     const r = await azureGet(url);
-    if (!r.ok) return { ok: false, error: r.error, agents: [] as unknown[] };
-    const d = r.data as { data?: unknown[] } | unknown[];
+    if (!r.ok) return { ok: false, error: r.error, agents: [] as any[] };
+    const d = r.data as { data?: any[] } | any[];
     const list = Array.isArray(d) ? d : d?.data ?? [];
     return { ok: true, agents: list };
   });
@@ -93,12 +94,12 @@ export const azureListModels = createServerFn({ method: "GET" })
         headers: apiKey ? { "api-key": apiKey, Accept: "application/json" } : { Accept: "application/json" },
       });
       const text = await res.text();
-      let data: unknown; try { data = JSON.parse(text); } catch { data = text; }
-      if (!res.ok) return { ok: false, error: typeof data === "string" ? data : JSON.stringify(data), models: [] as unknown[] };
-      const d = data as { data?: unknown[] } | unknown[];
+      let data: any; try { data = JSON.parse(text); } catch { data = text; }
+      if (!res.ok) return { ok: false, error: typeof data === "string" ? data : JSON.stringify(data), models: [] as any[] };
+      const d = data as { data?: any[] } | any[];
       return { ok: true, models: Array.isArray(d) ? d : d?.data ?? [] };
     } catch (e) {
-      return { ok: false, error: e instanceof Error ? e.message : String(e), models: [] as unknown[] };
+      return { ok: false, error: e instanceof Error ? e.message : String(e), models: [] as any[] };
     }
   });
 
@@ -109,8 +110,8 @@ export const azureListDeployments = createServerFn({ method: "GET" })
     // Instead, list deployments via Foundry project endpoint if exposed.
     const url = `${endpoint()}/deployments?api-version=${DEPLOYMENTS_API_VERSION}`;
     const r = await azureGet(url);
-    if (!r.ok) return { ok: false, error: r.error, deployments: [] as unknown[] };
-    const d = r.data as { data?: unknown[]; value?: unknown[] } | unknown[];
+    if (!r.ok) return { ok: false, error: r.error, deployments: [] as any[] };
+    const d = r.data as { data?: any[]; value?: any[] } | any[];
     const list = Array.isArray(d) ? d : d?.data ?? d?.value ?? [];
     return { ok: true, deployments: list };
   });
