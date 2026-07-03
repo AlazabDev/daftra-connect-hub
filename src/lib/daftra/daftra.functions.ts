@@ -138,3 +138,156 @@ export const listAuditLog = createServerFn({ method: "GET" }).handler(async () =
   if (error) return { entries: [], error: error.message };
   return { entries: data ?? [] };
 });
+
+type TestInput = { alazabKey: string };
+type AuthCheck = {
+  mode: "apikey" | "bearer" | "oauth_password";
+  ok: boolean;
+  status: number;
+  duration_ms: number;
+  message: string;
+  detail?: string;
+};
+
+async function probe(url: string, headers: Record<string, string>): Promise<{ ok: boolean; status: number; duration_ms: number; snippet: string }> {
+  const started = Date.now();
+  try {
+    const res = await fetch(url, { method: "GET", headers: { Accept: "application/json", ...headers } });
+    const text = await res.text();
+    return { ok: res.ok, status: res.status, duration_ms: Date.now() - started, snippet: text.slice(0, 200) };
+  } catch (e) {
+    return { ok: false, status: 0, duration_ms: Date.now() - started, snippet: e instanceof Error ? e.message : String(e) };
+  }
+}
+
+export const testDaftraConnection = createServerFn({ method: "POST" })
+  .inputValidator((data: TestInput) => data)
+  .handler(async ({ data }) => {
+    const expected = process.env.ALAZAB_MCP_PRIVATE_KEY;
+    const alazab = {
+      configured: !!expected,
+      matches: !!expected && data.alazabKey === expected,
+    };
+
+    const subdomain = process.env.DAFTRA_SUBDOMAIN;
+    const apiKey = process.env.DAFTRA_API_KEY;
+    const clientId = process.env.DAFTRA_CLIENT_ID;
+    const clientSecret = process.env.DAFTRA_CLIENT_SECRET;
+
+    const config = {
+      subdomain: subdomain ?? null,
+      hasApiKey: !!apiKey,
+      hasClientId: !!clientId,
+      hasClientSecret: !!clientSecret,
+    };
+
+    const checks: AuthCheck[] = [];
+
+    if (!alazab.matches) {
+      return {
+        ok: false,
+        alazab,
+        config,
+        checks,
+        error: alazab.configured
+          ? "مفتاح العزب المُدخل لا يطابق ALAZAB_MCP_PRIVATE_KEY على الخادم"
+          : "ALAZAB_MCP_PRIVATE_KEY غير مضبوط على الخادم",
+      };
+    }
+
+    if (!subdomain) {
+      return { ok: false, alazab, config, checks, error: "DAFTRA_SUBDOMAIN غير مضبوط" };
+    }
+
+    const base = `https://${subdomain}.daftra.com/api2`;
+    const testUrl = `${base}/clients.json?limit=1`;
+
+    // 1) apikey header
+    if (apiKey) {
+      const r = await probe(testUrl, { apikey: apiKey });
+      checks.push({
+        mode: "apikey",
+        ok: r.ok,
+        status: r.status,
+        duration_ms: r.duration_ms,
+        message: r.ok ? "نجح — apikey header صالح" : `فشل — HTTP ${r.status}`,
+        detail: r.snippet,
+      });
+    } else {
+      checks.push({ mode: "apikey", ok: false, status: 0, duration_ms: 0, message: "DAFTRA_API_KEY غير مضبوط" });
+    }
+
+    // 2) bearer token (using same api key as bearer)
+    if (apiKey) {
+      const r = await probe(testUrl, { Authorization: `Bearer ${apiKey}` });
+      checks.push({
+        mode: "bearer",
+        ok: r.ok,
+        status: r.status,
+        duration_ms: r.duration_ms,
+        message: r.ok ? "نجح — Bearer token صالح" : `فشل — HTTP ${r.status}`,
+        detail: r.snippet,
+      });
+    } else {
+      checks.push({ mode: "bearer", ok: false, status: 0, duration_ms: 0, message: "DAFTRA_API_KEY غير مضبوط (يُستخدم كـ Bearer)" });
+    }
+
+    // 3) oauth_password — request token then probe
+    if (clientId && clientSecret) {
+      const started = Date.now();
+      try {
+        const tokenRes = await fetch(`https://${subdomain}.daftra.com/v2/oauth/token`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json", Accept: "application/json" },
+          body: JSON.stringify({
+            grant_type: "client_credentials",
+            client_id: clientId,
+            client_secret: clientSecret,
+          }),
+        });
+        const tokText = await tokenRes.text();
+        let tok: { access_token?: string } = {};
+        try { tok = JSON.parse(tokText); } catch { /* ignore */ }
+        if (tokenRes.ok && tok.access_token) {
+          const r = await probe(testUrl, { Authorization: `Bearer ${tok.access_token}` });
+          checks.push({
+            mode: "oauth_password",
+            ok: r.ok,
+            status: r.status,
+            duration_ms: Date.now() - started,
+            message: r.ok ? "نجح — تم استلام token واستخدامه" : `token صالح لكن الاستدعاء فشل HTTP ${r.status}`,
+            detail: r.snippet,
+          });
+        } else {
+          checks.push({
+            mode: "oauth_password",
+            ok: false,
+            status: tokenRes.status,
+            duration_ms: Date.now() - started,
+            message: `فشل جلب OAuth token — HTTP ${tokenRes.status}`,
+            detail: tokText.slice(0, 200),
+          });
+        }
+      } catch (e) {
+        checks.push({
+          mode: "oauth_password",
+          ok: false,
+          status: 0,
+          duration_ms: Date.now() - started,
+          message: "خطأ شبكة أثناء طلب OAuth token",
+          detail: e instanceof Error ? e.message : String(e),
+        });
+      }
+    } else {
+      checks.push({
+        mode: "oauth_password",
+        ok: false,
+        status: 0,
+        duration_ms: 0,
+        message: "DAFTRA_CLIENT_ID / DAFTRA_CLIENT_SECRET غير مضبوطة",
+      });
+    }
+
+    const ok = checks.some((c) => c.ok);
+    return { ok, alazab, config, checks };
+  });
