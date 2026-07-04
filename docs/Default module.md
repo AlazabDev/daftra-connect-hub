@@ -42,7 +42,7 @@ POST /v2/oauth/token
 > Body Parameters
 
 ```yaml
-client_secret: jCfy6cMh1X6NTxR3OWLuvEFa0si5uZKr05UeoAEs
+client_secret: YOUR_CLIENT_SECRET_HERE
 client_id: "1"
 grant_type: password
 username: "{{username}}"
