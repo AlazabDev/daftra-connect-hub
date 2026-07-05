@@ -61,6 +61,7 @@ const NAV: NavItem[] = [
   { to: "/console/tools", label: "أدوات الذكاء الاصطناعي", icon: Boxes },
   { to: "/console/jobs", label: "مراقبة الوظائف", icon: Activity },
   { to: "/console/analytics", label: "التحليلات", icon: BarChart3 },
+  { to: "/foundry", label: "MCP-A2A", icon: Network },
   { to: "/console/settings", label: "الإعدادات", icon: Settings },
 ] as const;
 
