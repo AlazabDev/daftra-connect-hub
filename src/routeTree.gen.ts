@@ -12,27 +12,13 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as AuthRouteImport } from './routes/auth'
-import { Route as AppRouteImport } from './routes/_app'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AuthenticatedIndexRouteImport } from './routes/_authenticated/index'
 import { Route as ApiToolsRouteImport } from './routes/api/tools'
 import { Route as ApiPromptsRouteImport } from './routes/api/prompts'
 import { Route as ApiJobsRouteImport } from './routes/api/jobs'
-import { Route as ApiChatRouteImport } from './routes/api/chat'
 import { Route as AuthenticatedFoundryRouteImport } from './routes/_authenticated/foundry'
 import { Route as AuthenticatedAzureRouteImport } from './routes/_authenticated/azure'
-import { Route as AppToolsRouteImport } from './routes/_app/tools'
-import { Route as AppStorageRouteImport } from './routes/_app/storage'
-import { Route as AppSettingsRouteImport } from './routes/_app/settings'
-import { Route as AppPromptsRouteImport } from './routes/_app/prompts'
-import { Route as AppKnowledgeRouteImport } from './routes/_app/knowledge'
-import { Route as AppJobsRouteImport } from './routes/_app/jobs'
-import { Route as AppIntegrationsRouteImport } from './routes/_app/integrations'
-import { Route as AppGdriveRouteImport } from './routes/_app/gdrive'
-import { Route as AppDataRouteImport } from './routes/_app/data'
-import { Route as AppChatRouteImport } from './routes/_app/chat'
-import { Route as AppAnalyticsRouteImport } from './routes/_app/analytics'
-import { Route as AppAiGatewayIndexRouteImport } from './routes/_app/ai-gateway.index'
 import { Route as ApiPublicFoundryMcpRouteImport } from './routes/api/public/foundry-mcp'
 import { Route as ApiPublicDaftraMcpRouteImport } from './routes/api/public/daftra-mcp'
 import { Route as ApiPromptsIdRouteImport } from './routes/api/prompts/$id'
@@ -53,9 +39,6 @@ import { Route as ApiAuthLogoutRouteImport } from './routes/api/auth/logout'
 import { Route as ApiAuthLoginRouteImport } from './routes/api/auth/login'
 import { Route as ApiAnalyticsOverviewRouteImport } from './routes/api/analytics/overview'
 import { Route as ApiAiChatRouteImport } from './routes/api/ai/chat'
-import { Route as AppAiGatewayPoliciesRouteImport } from './routes/_app/ai-gateway.policies'
-import { Route as AppAiGatewayLogsRouteImport } from './routes/_app/ai-gateway.logs'
-import { Route as AppAiGatewayEndpointsRouteImport } from './routes/_app/ai-gateway.endpoints'
 import { Route as ApiToolsIdTestRouteImport } from './routes/api/tools/$id/test'
 import { Route as ApiPromptsIdTestRouteImport } from './routes/api/prompts/$id/test'
 import { Route as ApiKnowledgeSourcesIdRouteImport } from './routes/api/knowledge/sources/$id'
@@ -86,10 +69,6 @@ const AuthRoute = AuthRouteImport.update({
   path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AppRoute = AppRouteImport.update({
-  id: '/_app',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
   id: '/_authenticated',
   getParentRoute: () => rootRouteImport,
@@ -114,11 +93,6 @@ const ApiJobsRoute = ApiJobsRouteImport.update({
   path: '/api/jobs',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ApiChatRoute = ApiChatRouteImport.update({
-  id: '/api/chat',
-  path: '/api/chat',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const AuthenticatedFoundryRoute = AuthenticatedFoundryRouteImport.update({
   id: '/foundry',
   path: '/foundry',
@@ -128,66 +102,6 @@ const AuthenticatedAzureRoute = AuthenticatedAzureRouteImport.update({
   id: '/azure',
   path: '/azure',
   getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
-const AppToolsRoute = AppToolsRouteImport.update({
-  id: '/tools',
-  path: '/tools',
-  getParentRoute: () => AppRoute,
-} as any)
-const AppStorageRoute = AppStorageRouteImport.update({
-  id: '/storage',
-  path: '/storage',
-  getParentRoute: () => AppRoute,
-} as any)
-const AppSettingsRoute = AppSettingsRouteImport.update({
-  id: '/settings',
-  path: '/settings',
-  getParentRoute: () => AppRoute,
-} as any)
-const AppPromptsRoute = AppPromptsRouteImport.update({
-  id: '/prompts',
-  path: '/prompts',
-  getParentRoute: () => AppRoute,
-} as any)
-const AppKnowledgeRoute = AppKnowledgeRouteImport.update({
-  id: '/knowledge',
-  path: '/knowledge',
-  getParentRoute: () => AppRoute,
-} as any)
-const AppJobsRoute = AppJobsRouteImport.update({
-  id: '/jobs',
-  path: '/jobs',
-  getParentRoute: () => AppRoute,
-} as any)
-const AppIntegrationsRoute = AppIntegrationsRouteImport.update({
-  id: '/integrations',
-  path: '/integrations',
-  getParentRoute: () => AppRoute,
-} as any)
-const AppGdriveRoute = AppGdriveRouteImport.update({
-  id: '/gdrive',
-  path: '/gdrive',
-  getParentRoute: () => AppRoute,
-} as any)
-const AppDataRoute = AppDataRouteImport.update({
-  id: '/data',
-  path: '/data',
-  getParentRoute: () => AppRoute,
-} as any)
-const AppChatRoute = AppChatRouteImport.update({
-  id: '/chat',
-  path: '/chat',
-  getParentRoute: () => AppRoute,
-} as any)
-const AppAnalyticsRoute = AppAnalyticsRouteImport.update({
-  id: '/analytics',
-  path: '/analytics',
-  getParentRoute: () => AppRoute,
-} as any)
-const AppAiGatewayIndexRoute = AppAiGatewayIndexRouteImport.update({
-  id: '/ai-gateway/',
-  path: '/ai-gateway/',
-  getParentRoute: () => AppRoute,
 } as any)
 const ApiPublicFoundryMcpRoute = ApiPublicFoundryMcpRouteImport.update({
   id: '/api/public/foundry-mcp',
@@ -289,21 +203,6 @@ const ApiAiChatRoute = ApiAiChatRouteImport.update({
   path: '/api/ai/chat',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AppAiGatewayPoliciesRoute = AppAiGatewayPoliciesRouteImport.update({
-  id: '/ai-gateway/policies',
-  path: '/ai-gateway/policies',
-  getParentRoute: () => AppRoute,
-} as any)
-const AppAiGatewayLogsRoute = AppAiGatewayLogsRouteImport.update({
-  id: '/ai-gateway/logs',
-  path: '/ai-gateway/logs',
-  getParentRoute: () => AppRoute,
-} as any)
-const AppAiGatewayEndpointsRoute = AppAiGatewayEndpointsRouteImport.update({
-  id: '/ai-gateway/endpoints',
-  path: '/ai-gateway/endpoints',
-  getParentRoute: () => AppRoute,
-} as any)
 const ApiToolsIdTestRoute = ApiToolsIdTestRouteImport.update({
   id: '/$id/test',
   path: '/$id/test',
@@ -383,26 +282,11 @@ export interface FileRoutesByFullPath {
   '/auth': typeof AuthRoute
   '/login': typeof LoginRoute
   '/reset-password': typeof ResetPasswordRoute
-  '/analytics': typeof AppAnalyticsRoute
-  '/chat': typeof AppChatRoute
-  '/data': typeof AppDataRoute
-  '/gdrive': typeof AppGdriveRoute
-  '/integrations': typeof AppIntegrationsRoute
-  '/jobs': typeof AppJobsRoute
-  '/knowledge': typeof AppKnowledgeRoute
-  '/prompts': typeof AppPromptsRoute
-  '/settings': typeof AppSettingsRoute
-  '/storage': typeof AppStorageRoute
-  '/tools': typeof AppToolsRoute
   '/azure': typeof AuthenticatedAzureRoute
   '/foundry': typeof AuthenticatedFoundryRoute
-  '/api/chat': typeof ApiChatRoute
   '/api/jobs': typeof ApiJobsRouteWithChildren
   '/api/prompts': typeof ApiPromptsRouteWithChildren
   '/api/tools': typeof ApiToolsRouteWithChildren
-  '/ai-gateway/endpoints': typeof AppAiGatewayEndpointsRoute
-  '/ai-gateway/logs': typeof AppAiGatewayLogsRoute
-  '/ai-gateway/policies': typeof AppAiGatewayPoliciesRoute
   '/api/ai/chat': typeof ApiAiChatRoute
   '/api/analytics/overview': typeof ApiAnalyticsOverviewRoute
   '/api/auth/login': typeof ApiAuthLoginRoute
@@ -423,7 +307,6 @@ export interface FileRoutesByFullPath {
   '/api/prompts/$id': typeof ApiPromptsIdRouteWithChildren
   '/api/public/daftra-mcp': typeof ApiPublicDaftraMcpRoute
   '/api/public/foundry-mcp': typeof ApiPublicFoundryMcpRoute
-  '/ai-gateway/': typeof AppAiGatewayIndexRoute
   '/api/data/jobs/$id': typeof ApiDataJobsIdRouteWithChildren
   '/api/integrations/$id/secret': typeof ApiIntegrationsIdSecretRoute
   '/api/integrations/$id/test': typeof ApiIntegrationsIdTestRoute
@@ -440,30 +323,15 @@ export interface FileRoutesByFullPath {
   '/api/data/jobs/$id/send-to-knowledge-base': typeof ApiDataJobsIdSendToKnowledgeBaseRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof AuthenticatedIndexRoute
   '/auth': typeof AuthRoute
   '/login': typeof LoginRoute
   '/reset-password': typeof ResetPasswordRoute
-  '/analytics': typeof AppAnalyticsRoute
-  '/chat': typeof AppChatRoute
-  '/data': typeof AppDataRoute
-  '/gdrive': typeof AppGdriveRoute
-  '/integrations': typeof AppIntegrationsRoute
-  '/jobs': typeof AppJobsRoute
-  '/knowledge': typeof AppKnowledgeRoute
-  '/prompts': typeof AppPromptsRoute
-  '/settings': typeof AppSettingsRoute
-  '/storage': typeof AppStorageRoute
-  '/tools': typeof AppToolsRoute
   '/azure': typeof AuthenticatedAzureRoute
   '/foundry': typeof AuthenticatedFoundryRoute
-  '/api/chat': typeof ApiChatRoute
   '/api/jobs': typeof ApiJobsRouteWithChildren
   '/api/prompts': typeof ApiPromptsRouteWithChildren
   '/api/tools': typeof ApiToolsRouteWithChildren
-  '/ai-gateway/endpoints': typeof AppAiGatewayEndpointsRoute
-  '/ai-gateway/logs': typeof AppAiGatewayLogsRoute
-  '/ai-gateway/policies': typeof AppAiGatewayPoliciesRoute
+  '/': typeof AuthenticatedIndexRoute
   '/api/ai/chat': typeof ApiAiChatRoute
   '/api/analytics/overview': typeof ApiAnalyticsOverviewRoute
   '/api/auth/login': typeof ApiAuthLoginRoute
@@ -484,7 +352,6 @@ export interface FileRoutesByTo {
   '/api/prompts/$id': typeof ApiPromptsIdRouteWithChildren
   '/api/public/daftra-mcp': typeof ApiPublicDaftraMcpRoute
   '/api/public/foundry-mcp': typeof ApiPublicFoundryMcpRoute
-  '/ai-gateway': typeof AppAiGatewayIndexRoute
   '/api/data/jobs/$id': typeof ApiDataJobsIdRouteWithChildren
   '/api/integrations/$id/secret': typeof ApiIntegrationsIdSecretRoute
   '/api/integrations/$id/test': typeof ApiIntegrationsIdTestRoute
@@ -503,31 +370,15 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
-  '/_app': typeof AppRouteWithChildren
   '/auth': typeof AuthRoute
   '/login': typeof LoginRoute
   '/reset-password': typeof ResetPasswordRoute
-  '/_app/analytics': typeof AppAnalyticsRoute
-  '/_app/chat': typeof AppChatRoute
-  '/_app/data': typeof AppDataRoute
-  '/_app/gdrive': typeof AppGdriveRoute
-  '/_app/integrations': typeof AppIntegrationsRoute
-  '/_app/jobs': typeof AppJobsRoute
-  '/_app/knowledge': typeof AppKnowledgeRoute
-  '/_app/prompts': typeof AppPromptsRoute
-  '/_app/settings': typeof AppSettingsRoute
-  '/_app/storage': typeof AppStorageRoute
-  '/_app/tools': typeof AppToolsRoute
   '/_authenticated/azure': typeof AuthenticatedAzureRoute
   '/_authenticated/foundry': typeof AuthenticatedFoundryRoute
-  '/api/chat': typeof ApiChatRoute
   '/api/jobs': typeof ApiJobsRouteWithChildren
   '/api/prompts': typeof ApiPromptsRouteWithChildren
   '/api/tools': typeof ApiToolsRouteWithChildren
   '/_authenticated/': typeof AuthenticatedIndexRoute
-  '/_app/ai-gateway/endpoints': typeof AppAiGatewayEndpointsRoute
-  '/_app/ai-gateway/logs': typeof AppAiGatewayLogsRoute
-  '/_app/ai-gateway/policies': typeof AppAiGatewayPoliciesRoute
   '/api/ai/chat': typeof ApiAiChatRoute
   '/api/analytics/overview': typeof ApiAnalyticsOverviewRoute
   '/api/auth/login': typeof ApiAuthLoginRoute
@@ -548,7 +399,6 @@ export interface FileRoutesById {
   '/api/prompts/$id': typeof ApiPromptsIdRouteWithChildren
   '/api/public/daftra-mcp': typeof ApiPublicDaftraMcpRoute
   '/api/public/foundry-mcp': typeof ApiPublicFoundryMcpRoute
-  '/_app/ai-gateway/': typeof AppAiGatewayIndexRoute
   '/api/data/jobs/$id': typeof ApiDataJobsIdRouteWithChildren
   '/api/integrations/$id/secret': typeof ApiIntegrationsIdSecretRoute
   '/api/integrations/$id/test': typeof ApiIntegrationsIdTestRoute
@@ -571,26 +421,11 @@ export interface FileRouteTypes {
     | '/auth'
     | '/login'
     | '/reset-password'
-    | '/analytics'
-    | '/chat'
-    | '/data'
-    | '/gdrive'
-    | '/integrations'
-    | '/jobs'
-    | '/knowledge'
-    | '/prompts'
-    | '/settings'
-    | '/storage'
-    | '/tools'
     | '/azure'
     | '/foundry'
-    | '/api/chat'
     | '/api/jobs'
     | '/api/prompts'
     | '/api/tools'
-    | '/ai-gateway/endpoints'
-    | '/ai-gateway/logs'
-    | '/ai-gateway/policies'
     | '/api/ai/chat'
     | '/api/analytics/overview'
     | '/api/auth/login'
@@ -611,7 +446,6 @@ export interface FileRouteTypes {
     | '/api/prompts/$id'
     | '/api/public/daftra-mcp'
     | '/api/public/foundry-mcp'
-    | '/ai-gateway/'
     | '/api/data/jobs/$id'
     | '/api/integrations/$id/secret'
     | '/api/integrations/$id/test'
@@ -628,30 +462,15 @@ export interface FileRouteTypes {
     | '/api/data/jobs/$id/send-to-knowledge-base'
   fileRoutesByTo: FileRoutesByTo
   to:
-    | '/'
     | '/auth'
     | '/login'
     | '/reset-password'
-    | '/analytics'
-    | '/chat'
-    | '/data'
-    | '/gdrive'
-    | '/integrations'
-    | '/jobs'
-    | '/knowledge'
-    | '/prompts'
-    | '/settings'
-    | '/storage'
-    | '/tools'
     | '/azure'
     | '/foundry'
-    | '/api/chat'
     | '/api/jobs'
     | '/api/prompts'
     | '/api/tools'
-    | '/ai-gateway/endpoints'
-    | '/ai-gateway/logs'
-    | '/ai-gateway/policies'
+    | '/'
     | '/api/ai/chat'
     | '/api/analytics/overview'
     | '/api/auth/login'
@@ -672,7 +491,6 @@ export interface FileRouteTypes {
     | '/api/prompts/$id'
     | '/api/public/daftra-mcp'
     | '/api/public/foundry-mcp'
-    | '/ai-gateway'
     | '/api/data/jobs/$id'
     | '/api/integrations/$id/secret'
     | '/api/integrations/$id/test'
@@ -690,31 +508,15 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/_authenticated'
-    | '/_app'
     | '/auth'
     | '/login'
     | '/reset-password'
-    | '/_app/analytics'
-    | '/_app/chat'
-    | '/_app/data'
-    | '/_app/gdrive'
-    | '/_app/integrations'
-    | '/_app/jobs'
-    | '/_app/knowledge'
-    | '/_app/prompts'
-    | '/_app/settings'
-    | '/_app/storage'
-    | '/_app/tools'
     | '/_authenticated/azure'
     | '/_authenticated/foundry'
-    | '/api/chat'
     | '/api/jobs'
     | '/api/prompts'
     | '/api/tools'
     | '/_authenticated/'
-    | '/_app/ai-gateway/endpoints'
-    | '/_app/ai-gateway/logs'
-    | '/_app/ai-gateway/policies'
     | '/api/ai/chat'
     | '/api/analytics/overview'
     | '/api/auth/login'
@@ -735,7 +537,6 @@ export interface FileRouteTypes {
     | '/api/prompts/$id'
     | '/api/public/daftra-mcp'
     | '/api/public/foundry-mcp'
-    | '/_app/ai-gateway/'
     | '/api/data/jobs/$id'
     | '/api/integrations/$id/secret'
     | '/api/integrations/$id/test'
@@ -754,11 +555,9 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
-  AppRoute: typeof AppRouteWithChildren
   AuthRoute: typeof AuthRoute
   LoginRoute: typeof LoginRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
-  ApiChatRoute: typeof ApiChatRoute
   ApiJobsRoute: typeof ApiJobsRouteWithChildren
   ApiPromptsRoute: typeof ApiPromptsRouteWithChildren
   ApiToolsRoute: typeof ApiToolsRouteWithChildren
@@ -809,13 +608,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_app': {
-      id: '/_app'
-      path: ''
-      fullPath: '/'
-      preLoaderRoute: typeof AppRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/_authenticated': {
       id: '/_authenticated'
       path: ''
@@ -851,13 +643,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiJobsRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/chat': {
-      id: '/api/chat'
-      path: '/api/chat'
-      fullPath: '/api/chat'
-      preLoaderRoute: typeof ApiChatRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/_authenticated/foundry': {
       id: '/_authenticated/foundry'
       path: '/foundry'
@@ -871,90 +656,6 @@ declare module '@tanstack/react-router' {
       fullPath: '/azure'
       preLoaderRoute: typeof AuthenticatedAzureRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_app/tools': {
-      id: '/_app/tools'
-      path: '/tools'
-      fullPath: '/tools'
-      preLoaderRoute: typeof AppToolsRouteImport
-      parentRoute: typeof AppRoute
-    }
-    '/_app/storage': {
-      id: '/_app/storage'
-      path: '/storage'
-      fullPath: '/storage'
-      preLoaderRoute: typeof AppStorageRouteImport
-      parentRoute: typeof AppRoute
-    }
-    '/_app/settings': {
-      id: '/_app/settings'
-      path: '/settings'
-      fullPath: '/settings'
-      preLoaderRoute: typeof AppSettingsRouteImport
-      parentRoute: typeof AppRoute
-    }
-    '/_app/prompts': {
-      id: '/_app/prompts'
-      path: '/prompts'
-      fullPath: '/prompts'
-      preLoaderRoute: typeof AppPromptsRouteImport
-      parentRoute: typeof AppRoute
-    }
-    '/_app/knowledge': {
-      id: '/_app/knowledge'
-      path: '/knowledge'
-      fullPath: '/knowledge'
-      preLoaderRoute: typeof AppKnowledgeRouteImport
-      parentRoute: typeof AppRoute
-    }
-    '/_app/jobs': {
-      id: '/_app/jobs'
-      path: '/jobs'
-      fullPath: '/jobs'
-      preLoaderRoute: typeof AppJobsRouteImport
-      parentRoute: typeof AppRoute
-    }
-    '/_app/integrations': {
-      id: '/_app/integrations'
-      path: '/integrations'
-      fullPath: '/integrations'
-      preLoaderRoute: typeof AppIntegrationsRouteImport
-      parentRoute: typeof AppRoute
-    }
-    '/_app/gdrive': {
-      id: '/_app/gdrive'
-      path: '/gdrive'
-      fullPath: '/gdrive'
-      preLoaderRoute: typeof AppGdriveRouteImport
-      parentRoute: typeof AppRoute
-    }
-    '/_app/data': {
-      id: '/_app/data'
-      path: '/data'
-      fullPath: '/data'
-      preLoaderRoute: typeof AppDataRouteImport
-      parentRoute: typeof AppRoute
-    }
-    '/_app/chat': {
-      id: '/_app/chat'
-      path: '/chat'
-      fullPath: '/chat'
-      preLoaderRoute: typeof AppChatRouteImport
-      parentRoute: typeof AppRoute
-    }
-    '/_app/analytics': {
-      id: '/_app/analytics'
-      path: '/analytics'
-      fullPath: '/analytics'
-      preLoaderRoute: typeof AppAnalyticsRouteImport
-      parentRoute: typeof AppRoute
-    }
-    '/_app/ai-gateway/': {
-      id: '/_app/ai-gateway/'
-      path: '/ai-gateway'
-      fullPath: '/ai-gateway/'
-      preLoaderRoute: typeof AppAiGatewayIndexRouteImport
-      parentRoute: typeof AppRoute
     }
     '/api/public/foundry-mcp': {
       id: '/api/public/foundry-mcp'
@@ -1096,27 +797,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiAiChatRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_app/ai-gateway/policies': {
-      id: '/_app/ai-gateway/policies'
-      path: '/ai-gateway/policies'
-      fullPath: '/ai-gateway/policies'
-      preLoaderRoute: typeof AppAiGatewayPoliciesRouteImport
-      parentRoute: typeof AppRoute
-    }
-    '/_app/ai-gateway/logs': {
-      id: '/_app/ai-gateway/logs'
-      path: '/ai-gateway/logs'
-      fullPath: '/ai-gateway/logs'
-      preLoaderRoute: typeof AppAiGatewayLogsRouteImport
-      parentRoute: typeof AppRoute
-    }
-    '/_app/ai-gateway/endpoints': {
-      id: '/_app/ai-gateway/endpoints'
-      path: '/ai-gateway/endpoints'
-      fullPath: '/ai-gateway/endpoints'
-      preLoaderRoute: typeof AppAiGatewayEndpointsRouteImport
-      parentRoute: typeof AppRoute
-    }
     '/api/tools/$id/test': {
       id: '/api/tools/$id/test'
       path: '/$id/test'
@@ -1233,44 +913,6 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
 const AuthenticatedRouteRouteWithChildren =
   AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
 
-interface AppRouteChildren {
-  AppAnalyticsRoute: typeof AppAnalyticsRoute
-  AppChatRoute: typeof AppChatRoute
-  AppDataRoute: typeof AppDataRoute
-  AppGdriveRoute: typeof AppGdriveRoute
-  AppIntegrationsRoute: typeof AppIntegrationsRoute
-  AppJobsRoute: typeof AppJobsRoute
-  AppKnowledgeRoute: typeof AppKnowledgeRoute
-  AppPromptsRoute: typeof AppPromptsRoute
-  AppSettingsRoute: typeof AppSettingsRoute
-  AppStorageRoute: typeof AppStorageRoute
-  AppToolsRoute: typeof AppToolsRoute
-  AppAiGatewayEndpointsRoute: typeof AppAiGatewayEndpointsRoute
-  AppAiGatewayLogsRoute: typeof AppAiGatewayLogsRoute
-  AppAiGatewayPoliciesRoute: typeof AppAiGatewayPoliciesRoute
-  AppAiGatewayIndexRoute: typeof AppAiGatewayIndexRoute
-}
-
-const AppRouteChildren: AppRouteChildren = {
-  AppAnalyticsRoute: AppAnalyticsRoute,
-  AppChatRoute: AppChatRoute,
-  AppDataRoute: AppDataRoute,
-  AppGdriveRoute: AppGdriveRoute,
-  AppIntegrationsRoute: AppIntegrationsRoute,
-  AppJobsRoute: AppJobsRoute,
-  AppKnowledgeRoute: AppKnowledgeRoute,
-  AppPromptsRoute: AppPromptsRoute,
-  AppSettingsRoute: AppSettingsRoute,
-  AppStorageRoute: AppStorageRoute,
-  AppToolsRoute: AppToolsRoute,
-  AppAiGatewayEndpointsRoute: AppAiGatewayEndpointsRoute,
-  AppAiGatewayLogsRoute: AppAiGatewayLogsRoute,
-  AppAiGatewayPoliciesRoute: AppAiGatewayPoliciesRoute,
-  AppAiGatewayIndexRoute: AppAiGatewayIndexRoute,
-}
-
-const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
-
 interface ApiJobsIdRouteChildren {
   ApiJobsIdCancelRoute: typeof ApiJobsIdCancelRoute
   ApiJobsIdRetryRoute: typeof ApiJobsIdRetryRoute
@@ -1375,11 +1017,9 @@ const ApiKnowledgeSourcesRouteWithChildren =
 
 const rootRouteChildren: RootRouteChildren = {
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
-  AppRoute: AppRouteWithChildren,
   AuthRoute: AuthRoute,
   LoginRoute: LoginRoute,
   ResetPasswordRoute: ResetPasswordRoute,
-  ApiChatRoute: ApiChatRoute,
   ApiJobsRoute: ApiJobsRouteWithChildren,
   ApiPromptsRoute: ApiPromptsRouteWithChildren,
   ApiToolsRoute: ApiToolsRouteWithChildren,
