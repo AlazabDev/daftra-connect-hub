@@ -129,20 +129,29 @@ export const callDaftraTool = createServerFn({ method: "POST" })
     return { ok, status, duration_ms: duration, error: errMsg, data: respBody, url: url.toString() };
   });
 
-export const listAuditLog = createServerFn({ method: "GET" }).handler(async () => {
-  try {
-    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-    const { data, error } = await supabaseAdmin
-      .from("daftra_audit_log")
-      .select("*")
-      .order("created_at", { ascending: false })
-      .limit(100);
-    if (error) return { entries: [], error: error.message };
-    return { entries: data ?? [] };
-  } catch (e) {
-    return { entries: [], error: e instanceof Error ? e.message : String(e) };
-  }
-});
+export const listAuditLog = createServerFn({ method: "GET" })
+  .middleware([requireSupabaseAuth])
+  .handler(async ({ context }) => {
+    try {
+      // Admin-only: audit log contains internal ERP tool call history.
+      const { data: isAdmin } = await context.supabase.rpc("has_role", {
+        _user_id: context.userId,
+        _role: "admin",
+      });
+      if (!isAdmin) return { entries: [], error: "Forbidden: admin role required" };
+
+      const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+      const { data, error } = await supabaseAdmin
+        .from("daftra_audit_log")
+        .select("*")
+        .order("created_at", { ascending: false })
+        .limit(100);
+      if (error) return { entries: [], error: error.message };
+      return { entries: data ?? [] };
+    } catch (e) {
+      return { entries: [], error: e instanceof Error ? e.message : String(e) };
+    }
+  });
 
 type TestInput = { alazabKey: string };
 type AuthCheck = {
