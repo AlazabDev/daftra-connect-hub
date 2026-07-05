@@ -11,14 +11,34 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as LoginRouteImport } from './routes/login'
+import { Route as ConsoleRouteImport } from './routes/console'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
+import { Route as ConsoleIndexRouteImport } from './routes/console/index'
 import { Route as AuthenticatedIndexRouteImport } from './routes/_authenticated/index'
+import { Route as ConsoleTrainingRouteImport } from './routes/console/training'
+import { Route as ConsoleToolsRouteImport } from './routes/console/tools'
+import { Route as ConsoleStorageRouteImport } from './routes/console/storage'
+import { Route as ConsoleSettingsRouteImport } from './routes/console/settings'
+import { Route as ConsolePromptsRouteImport } from './routes/console/prompts'
+import { Route as ConsoleKnowledgeRouteImport } from './routes/console/knowledge'
+import { Route as ConsoleJobsRouteImport } from './routes/console/jobs'
+import { Route as ConsoleIntegrationsRouteImport } from './routes/console/integrations'
+import { Route as ConsoleGdriveRouteImport } from './routes/console/gdrive'
+import { Route as ConsoleDataRouteImport } from './routes/console/data'
+import { Route as ConsoleChatRouteImport } from './routes/console/chat'
+import { Route as ConsoleAnalyticsRouteImport } from './routes/console/analytics'
 import { Route as ApiToolsRouteImport } from './routes/api/tools'
 import { Route as ApiPromptsRouteImport } from './routes/api/prompts'
 import { Route as ApiJobsRouteImport } from './routes/api/jobs'
+import { Route as ApiChatRouteImport } from './routes/api/chat'
 import { Route as AuthenticatedFoundryRouteImport } from './routes/_authenticated/foundry'
 import { Route as AuthenticatedAzureRouteImport } from './routes/_authenticated/azure'
+import { Route as ConsoleAiGatewayIndexRouteImport } from './routes/console/ai-gateway.index'
+import { Route as ConsoleAiGatewayPoliciesRouteImport } from './routes/console/ai-gateway.policies'
+import { Route as ConsoleAiGatewayLogsRouteImport } from './routes/console/ai-gateway.logs'
+import { Route as ConsoleAiGatewayEndpointsRouteImport } from './routes/console/ai-gateway.endpoints'
+import { Route as ConsoleAiGatewayAgentsRouteImport } from './routes/console/ai-gateway.agents'
 import { Route as ApiPublicFoundryMcpRouteImport } from './routes/api/public/foundry-mcp'
 import { Route as ApiPublicDaftraMcpRouteImport } from './routes/api/public/daftra-mcp'
 import { Route as ApiPromptsIdRouteImport } from './routes/api/prompts/$id'
@@ -64,6 +84,11 @@ const LoginRoute = LoginRouteImport.update({
   path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ConsoleRoute = ConsoleRouteImport.update({
+  id: '/console',
+  path: '/console',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AuthRoute = AuthRouteImport.update({
   id: '/auth',
   path: '/auth',
@@ -73,10 +98,75 @@ const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
   id: '/_authenticated',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ConsoleIndexRoute = ConsoleIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => ConsoleRoute,
+} as any)
 const AuthenticatedIndexRoute = AuthenticatedIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const ConsoleTrainingRoute = ConsoleTrainingRouteImport.update({
+  id: '/training',
+  path: '/training',
+  getParentRoute: () => ConsoleRoute,
+} as any)
+const ConsoleToolsRoute = ConsoleToolsRouteImport.update({
+  id: '/tools',
+  path: '/tools',
+  getParentRoute: () => ConsoleRoute,
+} as any)
+const ConsoleStorageRoute = ConsoleStorageRouteImport.update({
+  id: '/storage',
+  path: '/storage',
+  getParentRoute: () => ConsoleRoute,
+} as any)
+const ConsoleSettingsRoute = ConsoleSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => ConsoleRoute,
+} as any)
+const ConsolePromptsRoute = ConsolePromptsRouteImport.update({
+  id: '/prompts',
+  path: '/prompts',
+  getParentRoute: () => ConsoleRoute,
+} as any)
+const ConsoleKnowledgeRoute = ConsoleKnowledgeRouteImport.update({
+  id: '/knowledge',
+  path: '/knowledge',
+  getParentRoute: () => ConsoleRoute,
+} as any)
+const ConsoleJobsRoute = ConsoleJobsRouteImport.update({
+  id: '/jobs',
+  path: '/jobs',
+  getParentRoute: () => ConsoleRoute,
+} as any)
+const ConsoleIntegrationsRoute = ConsoleIntegrationsRouteImport.update({
+  id: '/integrations',
+  path: '/integrations',
+  getParentRoute: () => ConsoleRoute,
+} as any)
+const ConsoleGdriveRoute = ConsoleGdriveRouteImport.update({
+  id: '/gdrive',
+  path: '/gdrive',
+  getParentRoute: () => ConsoleRoute,
+} as any)
+const ConsoleDataRoute = ConsoleDataRouteImport.update({
+  id: '/data',
+  path: '/data',
+  getParentRoute: () => ConsoleRoute,
+} as any)
+const ConsoleChatRoute = ConsoleChatRouteImport.update({
+  id: '/chat',
+  path: '/chat',
+  getParentRoute: () => ConsoleRoute,
+} as any)
+const ConsoleAnalyticsRoute = ConsoleAnalyticsRouteImport.update({
+  id: '/analytics',
+  path: '/analytics',
+  getParentRoute: () => ConsoleRoute,
 } as any)
 const ApiToolsRoute = ApiToolsRouteImport.update({
   id: '/api/tools',
@@ -93,6 +183,11 @@ const ApiJobsRoute = ApiJobsRouteImport.update({
   path: '/api/jobs',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiChatRoute = ApiChatRouteImport.update({
+  id: '/api/chat',
+  path: '/api/chat',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AuthenticatedFoundryRoute = AuthenticatedFoundryRouteImport.update({
   id: '/foundry',
   path: '/foundry',
@@ -102,6 +197,33 @@ const AuthenticatedAzureRoute = AuthenticatedAzureRouteImport.update({
   id: '/azure',
   path: '/azure',
   getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const ConsoleAiGatewayIndexRoute = ConsoleAiGatewayIndexRouteImport.update({
+  id: '/ai-gateway/',
+  path: '/ai-gateway/',
+  getParentRoute: () => ConsoleRoute,
+} as any)
+const ConsoleAiGatewayPoliciesRoute =
+  ConsoleAiGatewayPoliciesRouteImport.update({
+    id: '/ai-gateway/policies',
+    path: '/ai-gateway/policies',
+    getParentRoute: () => ConsoleRoute,
+  } as any)
+const ConsoleAiGatewayLogsRoute = ConsoleAiGatewayLogsRouteImport.update({
+  id: '/ai-gateway/logs',
+  path: '/ai-gateway/logs',
+  getParentRoute: () => ConsoleRoute,
+} as any)
+const ConsoleAiGatewayEndpointsRoute =
+  ConsoleAiGatewayEndpointsRouteImport.update({
+    id: '/ai-gateway/endpoints',
+    path: '/ai-gateway/endpoints',
+    getParentRoute: () => ConsoleRoute,
+  } as any)
+const ConsoleAiGatewayAgentsRoute = ConsoleAiGatewayAgentsRouteImport.update({
+  id: '/ai-gateway/agents',
+  path: '/ai-gateway/agents',
+  getParentRoute: () => ConsoleRoute,
 } as any)
 const ApiPublicFoundryMcpRoute = ApiPublicFoundryMcpRouteImport.update({
   id: '/api/public/foundry-mcp',
@@ -280,13 +402,28 @@ const ApiDataJobsIdApproveRoute = ApiDataJobsIdApproveRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof AuthenticatedIndexRoute
   '/auth': typeof AuthRoute
+  '/console': typeof ConsoleRouteWithChildren
   '/login': typeof LoginRoute
   '/reset-password': typeof ResetPasswordRoute
   '/azure': typeof AuthenticatedAzureRoute
   '/foundry': typeof AuthenticatedFoundryRoute
+  '/api/chat': typeof ApiChatRoute
   '/api/jobs': typeof ApiJobsRouteWithChildren
   '/api/prompts': typeof ApiPromptsRouteWithChildren
   '/api/tools': typeof ApiToolsRouteWithChildren
+  '/console/analytics': typeof ConsoleAnalyticsRoute
+  '/console/chat': typeof ConsoleChatRoute
+  '/console/data': typeof ConsoleDataRoute
+  '/console/gdrive': typeof ConsoleGdriveRoute
+  '/console/integrations': typeof ConsoleIntegrationsRoute
+  '/console/jobs': typeof ConsoleJobsRoute
+  '/console/knowledge': typeof ConsoleKnowledgeRoute
+  '/console/prompts': typeof ConsolePromptsRoute
+  '/console/settings': typeof ConsoleSettingsRoute
+  '/console/storage': typeof ConsoleStorageRoute
+  '/console/tools': typeof ConsoleToolsRoute
+  '/console/training': typeof ConsoleTrainingRoute
+  '/console/': typeof ConsoleIndexRoute
   '/api/ai/chat': typeof ApiAiChatRoute
   '/api/analytics/overview': typeof ApiAnalyticsOverviewRoute
   '/api/auth/login': typeof ApiAuthLoginRoute
@@ -307,6 +444,11 @@ export interface FileRoutesByFullPath {
   '/api/prompts/$id': typeof ApiPromptsIdRouteWithChildren
   '/api/public/daftra-mcp': typeof ApiPublicDaftraMcpRoute
   '/api/public/foundry-mcp': typeof ApiPublicFoundryMcpRoute
+  '/console/ai-gateway/agents': typeof ConsoleAiGatewayAgentsRoute
+  '/console/ai-gateway/endpoints': typeof ConsoleAiGatewayEndpointsRoute
+  '/console/ai-gateway/logs': typeof ConsoleAiGatewayLogsRoute
+  '/console/ai-gateway/policies': typeof ConsoleAiGatewayPoliciesRoute
+  '/console/ai-gateway/': typeof ConsoleAiGatewayIndexRoute
   '/api/data/jobs/$id': typeof ApiDataJobsIdRouteWithChildren
   '/api/integrations/$id/secret': typeof ApiIntegrationsIdSecretRoute
   '/api/integrations/$id/test': typeof ApiIntegrationsIdTestRoute
@@ -328,10 +470,24 @@ export interface FileRoutesByTo {
   '/reset-password': typeof ResetPasswordRoute
   '/azure': typeof AuthenticatedAzureRoute
   '/foundry': typeof AuthenticatedFoundryRoute
+  '/api/chat': typeof ApiChatRoute
   '/api/jobs': typeof ApiJobsRouteWithChildren
   '/api/prompts': typeof ApiPromptsRouteWithChildren
   '/api/tools': typeof ApiToolsRouteWithChildren
+  '/console/analytics': typeof ConsoleAnalyticsRoute
+  '/console/chat': typeof ConsoleChatRoute
+  '/console/data': typeof ConsoleDataRoute
+  '/console/gdrive': typeof ConsoleGdriveRoute
+  '/console/integrations': typeof ConsoleIntegrationsRoute
+  '/console/jobs': typeof ConsoleJobsRoute
+  '/console/knowledge': typeof ConsoleKnowledgeRoute
+  '/console/prompts': typeof ConsolePromptsRoute
+  '/console/settings': typeof ConsoleSettingsRoute
+  '/console/storage': typeof ConsoleStorageRoute
+  '/console/tools': typeof ConsoleToolsRoute
+  '/console/training': typeof ConsoleTrainingRoute
   '/': typeof AuthenticatedIndexRoute
+  '/console': typeof ConsoleIndexRoute
   '/api/ai/chat': typeof ApiAiChatRoute
   '/api/analytics/overview': typeof ApiAnalyticsOverviewRoute
   '/api/auth/login': typeof ApiAuthLoginRoute
@@ -352,6 +508,11 @@ export interface FileRoutesByTo {
   '/api/prompts/$id': typeof ApiPromptsIdRouteWithChildren
   '/api/public/daftra-mcp': typeof ApiPublicDaftraMcpRoute
   '/api/public/foundry-mcp': typeof ApiPublicFoundryMcpRoute
+  '/console/ai-gateway/agents': typeof ConsoleAiGatewayAgentsRoute
+  '/console/ai-gateway/endpoints': typeof ConsoleAiGatewayEndpointsRoute
+  '/console/ai-gateway/logs': typeof ConsoleAiGatewayLogsRoute
+  '/console/ai-gateway/policies': typeof ConsoleAiGatewayPoliciesRoute
+  '/console/ai-gateway': typeof ConsoleAiGatewayIndexRoute
   '/api/data/jobs/$id': typeof ApiDataJobsIdRouteWithChildren
   '/api/integrations/$id/secret': typeof ApiIntegrationsIdSecretRoute
   '/api/integrations/$id/test': typeof ApiIntegrationsIdTestRoute
@@ -371,14 +532,29 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
+  '/console': typeof ConsoleRouteWithChildren
   '/login': typeof LoginRoute
   '/reset-password': typeof ResetPasswordRoute
   '/_authenticated/azure': typeof AuthenticatedAzureRoute
   '/_authenticated/foundry': typeof AuthenticatedFoundryRoute
+  '/api/chat': typeof ApiChatRoute
   '/api/jobs': typeof ApiJobsRouteWithChildren
   '/api/prompts': typeof ApiPromptsRouteWithChildren
   '/api/tools': typeof ApiToolsRouteWithChildren
+  '/console/analytics': typeof ConsoleAnalyticsRoute
+  '/console/chat': typeof ConsoleChatRoute
+  '/console/data': typeof ConsoleDataRoute
+  '/console/gdrive': typeof ConsoleGdriveRoute
+  '/console/integrations': typeof ConsoleIntegrationsRoute
+  '/console/jobs': typeof ConsoleJobsRoute
+  '/console/knowledge': typeof ConsoleKnowledgeRoute
+  '/console/prompts': typeof ConsolePromptsRoute
+  '/console/settings': typeof ConsoleSettingsRoute
+  '/console/storage': typeof ConsoleStorageRoute
+  '/console/tools': typeof ConsoleToolsRoute
+  '/console/training': typeof ConsoleTrainingRoute
   '/_authenticated/': typeof AuthenticatedIndexRoute
+  '/console/': typeof ConsoleIndexRoute
   '/api/ai/chat': typeof ApiAiChatRoute
   '/api/analytics/overview': typeof ApiAnalyticsOverviewRoute
   '/api/auth/login': typeof ApiAuthLoginRoute
@@ -399,6 +575,11 @@ export interface FileRoutesById {
   '/api/prompts/$id': typeof ApiPromptsIdRouteWithChildren
   '/api/public/daftra-mcp': typeof ApiPublicDaftraMcpRoute
   '/api/public/foundry-mcp': typeof ApiPublicFoundryMcpRoute
+  '/console/ai-gateway/agents': typeof ConsoleAiGatewayAgentsRoute
+  '/console/ai-gateway/endpoints': typeof ConsoleAiGatewayEndpointsRoute
+  '/console/ai-gateway/logs': typeof ConsoleAiGatewayLogsRoute
+  '/console/ai-gateway/policies': typeof ConsoleAiGatewayPoliciesRoute
+  '/console/ai-gateway/': typeof ConsoleAiGatewayIndexRoute
   '/api/data/jobs/$id': typeof ApiDataJobsIdRouteWithChildren
   '/api/integrations/$id/secret': typeof ApiIntegrationsIdSecretRoute
   '/api/integrations/$id/test': typeof ApiIntegrationsIdTestRoute
@@ -419,13 +600,28 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/auth'
+    | '/console'
     | '/login'
     | '/reset-password'
     | '/azure'
     | '/foundry'
+    | '/api/chat'
     | '/api/jobs'
     | '/api/prompts'
     | '/api/tools'
+    | '/console/analytics'
+    | '/console/chat'
+    | '/console/data'
+    | '/console/gdrive'
+    | '/console/integrations'
+    | '/console/jobs'
+    | '/console/knowledge'
+    | '/console/prompts'
+    | '/console/settings'
+    | '/console/storage'
+    | '/console/tools'
+    | '/console/training'
+    | '/console/'
     | '/api/ai/chat'
     | '/api/analytics/overview'
     | '/api/auth/login'
@@ -446,6 +642,11 @@ export interface FileRouteTypes {
     | '/api/prompts/$id'
     | '/api/public/daftra-mcp'
     | '/api/public/foundry-mcp'
+    | '/console/ai-gateway/agents'
+    | '/console/ai-gateway/endpoints'
+    | '/console/ai-gateway/logs'
+    | '/console/ai-gateway/policies'
+    | '/console/ai-gateway/'
     | '/api/data/jobs/$id'
     | '/api/integrations/$id/secret'
     | '/api/integrations/$id/test'
@@ -467,10 +668,24 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/azure'
     | '/foundry'
+    | '/api/chat'
     | '/api/jobs'
     | '/api/prompts'
     | '/api/tools'
+    | '/console/analytics'
+    | '/console/chat'
+    | '/console/data'
+    | '/console/gdrive'
+    | '/console/integrations'
+    | '/console/jobs'
+    | '/console/knowledge'
+    | '/console/prompts'
+    | '/console/settings'
+    | '/console/storage'
+    | '/console/tools'
+    | '/console/training'
     | '/'
+    | '/console'
     | '/api/ai/chat'
     | '/api/analytics/overview'
     | '/api/auth/login'
@@ -491,6 +706,11 @@ export interface FileRouteTypes {
     | '/api/prompts/$id'
     | '/api/public/daftra-mcp'
     | '/api/public/foundry-mcp'
+    | '/console/ai-gateway/agents'
+    | '/console/ai-gateway/endpoints'
+    | '/console/ai-gateway/logs'
+    | '/console/ai-gateway/policies'
+    | '/console/ai-gateway'
     | '/api/data/jobs/$id'
     | '/api/integrations/$id/secret'
     | '/api/integrations/$id/test'
@@ -509,14 +729,29 @@ export interface FileRouteTypes {
     | '__root__'
     | '/_authenticated'
     | '/auth'
+    | '/console'
     | '/login'
     | '/reset-password'
     | '/_authenticated/azure'
     | '/_authenticated/foundry'
+    | '/api/chat'
     | '/api/jobs'
     | '/api/prompts'
     | '/api/tools'
+    | '/console/analytics'
+    | '/console/chat'
+    | '/console/data'
+    | '/console/gdrive'
+    | '/console/integrations'
+    | '/console/jobs'
+    | '/console/knowledge'
+    | '/console/prompts'
+    | '/console/settings'
+    | '/console/storage'
+    | '/console/tools'
+    | '/console/training'
     | '/_authenticated/'
+    | '/console/'
     | '/api/ai/chat'
     | '/api/analytics/overview'
     | '/api/auth/login'
@@ -537,6 +772,11 @@ export interface FileRouteTypes {
     | '/api/prompts/$id'
     | '/api/public/daftra-mcp'
     | '/api/public/foundry-mcp'
+    | '/console/ai-gateway/agents'
+    | '/console/ai-gateway/endpoints'
+    | '/console/ai-gateway/logs'
+    | '/console/ai-gateway/policies'
+    | '/console/ai-gateway/'
     | '/api/data/jobs/$id'
     | '/api/integrations/$id/secret'
     | '/api/integrations/$id/test'
@@ -556,8 +796,10 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AuthRoute: typeof AuthRoute
+  ConsoleRoute: typeof ConsoleRouteWithChildren
   LoginRoute: typeof LoginRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
+  ApiChatRoute: typeof ApiChatRoute
   ApiJobsRoute: typeof ApiJobsRouteWithChildren
   ApiPromptsRoute: typeof ApiPromptsRouteWithChildren
   ApiToolsRoute: typeof ApiToolsRouteWithChildren
@@ -601,6 +843,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/console': {
+      id: '/console'
+      path: '/console'
+      fullPath: '/console'
+      preLoaderRoute: typeof ConsoleRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/auth': {
       id: '/auth'
       path: '/auth'
@@ -615,12 +864,103 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/console/': {
+      id: '/console/'
+      path: '/'
+      fullPath: '/console/'
+      preLoaderRoute: typeof ConsoleIndexRouteImport
+      parentRoute: typeof ConsoleRoute
+    }
     '/_authenticated/': {
       id: '/_authenticated/'
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof AuthenticatedIndexRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/console/training': {
+      id: '/console/training'
+      path: '/training'
+      fullPath: '/console/training'
+      preLoaderRoute: typeof ConsoleTrainingRouteImport
+      parentRoute: typeof ConsoleRoute
+    }
+    '/console/tools': {
+      id: '/console/tools'
+      path: '/tools'
+      fullPath: '/console/tools'
+      preLoaderRoute: typeof ConsoleToolsRouteImport
+      parentRoute: typeof ConsoleRoute
+    }
+    '/console/storage': {
+      id: '/console/storage'
+      path: '/storage'
+      fullPath: '/console/storage'
+      preLoaderRoute: typeof ConsoleStorageRouteImport
+      parentRoute: typeof ConsoleRoute
+    }
+    '/console/settings': {
+      id: '/console/settings'
+      path: '/settings'
+      fullPath: '/console/settings'
+      preLoaderRoute: typeof ConsoleSettingsRouteImport
+      parentRoute: typeof ConsoleRoute
+    }
+    '/console/prompts': {
+      id: '/console/prompts'
+      path: '/prompts'
+      fullPath: '/console/prompts'
+      preLoaderRoute: typeof ConsolePromptsRouteImport
+      parentRoute: typeof ConsoleRoute
+    }
+    '/console/knowledge': {
+      id: '/console/knowledge'
+      path: '/knowledge'
+      fullPath: '/console/knowledge'
+      preLoaderRoute: typeof ConsoleKnowledgeRouteImport
+      parentRoute: typeof ConsoleRoute
+    }
+    '/console/jobs': {
+      id: '/console/jobs'
+      path: '/jobs'
+      fullPath: '/console/jobs'
+      preLoaderRoute: typeof ConsoleJobsRouteImport
+      parentRoute: typeof ConsoleRoute
+    }
+    '/console/integrations': {
+      id: '/console/integrations'
+      path: '/integrations'
+      fullPath: '/console/integrations'
+      preLoaderRoute: typeof ConsoleIntegrationsRouteImport
+      parentRoute: typeof ConsoleRoute
+    }
+    '/console/gdrive': {
+      id: '/console/gdrive'
+      path: '/gdrive'
+      fullPath: '/console/gdrive'
+      preLoaderRoute: typeof ConsoleGdriveRouteImport
+      parentRoute: typeof ConsoleRoute
+    }
+    '/console/data': {
+      id: '/console/data'
+      path: '/data'
+      fullPath: '/console/data'
+      preLoaderRoute: typeof ConsoleDataRouteImport
+      parentRoute: typeof ConsoleRoute
+    }
+    '/console/chat': {
+      id: '/console/chat'
+      path: '/chat'
+      fullPath: '/console/chat'
+      preLoaderRoute: typeof ConsoleChatRouteImport
+      parentRoute: typeof ConsoleRoute
+    }
+    '/console/analytics': {
+      id: '/console/analytics'
+      path: '/analytics'
+      fullPath: '/console/analytics'
+      preLoaderRoute: typeof ConsoleAnalyticsRouteImport
+      parentRoute: typeof ConsoleRoute
     }
     '/api/tools': {
       id: '/api/tools'
@@ -643,6 +983,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiJobsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/chat': {
+      id: '/api/chat'
+      path: '/api/chat'
+      fullPath: '/api/chat'
+      preLoaderRoute: typeof ApiChatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/_authenticated/foundry': {
       id: '/_authenticated/foundry'
       path: '/foundry'
@@ -656,6 +1003,41 @@ declare module '@tanstack/react-router' {
       fullPath: '/azure'
       preLoaderRoute: typeof AuthenticatedAzureRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/console/ai-gateway/': {
+      id: '/console/ai-gateway/'
+      path: '/ai-gateway'
+      fullPath: '/console/ai-gateway/'
+      preLoaderRoute: typeof ConsoleAiGatewayIndexRouteImport
+      parentRoute: typeof ConsoleRoute
+    }
+    '/console/ai-gateway/policies': {
+      id: '/console/ai-gateway/policies'
+      path: '/ai-gateway/policies'
+      fullPath: '/console/ai-gateway/policies'
+      preLoaderRoute: typeof ConsoleAiGatewayPoliciesRouteImport
+      parentRoute: typeof ConsoleRoute
+    }
+    '/console/ai-gateway/logs': {
+      id: '/console/ai-gateway/logs'
+      path: '/ai-gateway/logs'
+      fullPath: '/console/ai-gateway/logs'
+      preLoaderRoute: typeof ConsoleAiGatewayLogsRouteImport
+      parentRoute: typeof ConsoleRoute
+    }
+    '/console/ai-gateway/endpoints': {
+      id: '/console/ai-gateway/endpoints'
+      path: '/ai-gateway/endpoints'
+      fullPath: '/console/ai-gateway/endpoints'
+      preLoaderRoute: typeof ConsoleAiGatewayEndpointsRouteImport
+      parentRoute: typeof ConsoleRoute
+    }
+    '/console/ai-gateway/agents': {
+      id: '/console/ai-gateway/agents'
+      path: '/ai-gateway/agents'
+      fullPath: '/console/ai-gateway/agents'
+      preLoaderRoute: typeof ConsoleAiGatewayAgentsRouteImport
+      parentRoute: typeof ConsoleRoute
     }
     '/api/public/foundry-mcp': {
       id: '/api/public/foundry-mcp'
@@ -913,6 +1295,51 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
 const AuthenticatedRouteRouteWithChildren =
   AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
 
+interface ConsoleRouteChildren {
+  ConsoleAnalyticsRoute: typeof ConsoleAnalyticsRoute
+  ConsoleChatRoute: typeof ConsoleChatRoute
+  ConsoleDataRoute: typeof ConsoleDataRoute
+  ConsoleGdriveRoute: typeof ConsoleGdriveRoute
+  ConsoleIntegrationsRoute: typeof ConsoleIntegrationsRoute
+  ConsoleJobsRoute: typeof ConsoleJobsRoute
+  ConsoleKnowledgeRoute: typeof ConsoleKnowledgeRoute
+  ConsolePromptsRoute: typeof ConsolePromptsRoute
+  ConsoleSettingsRoute: typeof ConsoleSettingsRoute
+  ConsoleStorageRoute: typeof ConsoleStorageRoute
+  ConsoleToolsRoute: typeof ConsoleToolsRoute
+  ConsoleTrainingRoute: typeof ConsoleTrainingRoute
+  ConsoleIndexRoute: typeof ConsoleIndexRoute
+  ConsoleAiGatewayAgentsRoute: typeof ConsoleAiGatewayAgentsRoute
+  ConsoleAiGatewayEndpointsRoute: typeof ConsoleAiGatewayEndpointsRoute
+  ConsoleAiGatewayLogsRoute: typeof ConsoleAiGatewayLogsRoute
+  ConsoleAiGatewayPoliciesRoute: typeof ConsoleAiGatewayPoliciesRoute
+  ConsoleAiGatewayIndexRoute: typeof ConsoleAiGatewayIndexRoute
+}
+
+const ConsoleRouteChildren: ConsoleRouteChildren = {
+  ConsoleAnalyticsRoute: ConsoleAnalyticsRoute,
+  ConsoleChatRoute: ConsoleChatRoute,
+  ConsoleDataRoute: ConsoleDataRoute,
+  ConsoleGdriveRoute: ConsoleGdriveRoute,
+  ConsoleIntegrationsRoute: ConsoleIntegrationsRoute,
+  ConsoleJobsRoute: ConsoleJobsRoute,
+  ConsoleKnowledgeRoute: ConsoleKnowledgeRoute,
+  ConsolePromptsRoute: ConsolePromptsRoute,
+  ConsoleSettingsRoute: ConsoleSettingsRoute,
+  ConsoleStorageRoute: ConsoleStorageRoute,
+  ConsoleToolsRoute: ConsoleToolsRoute,
+  ConsoleTrainingRoute: ConsoleTrainingRoute,
+  ConsoleIndexRoute: ConsoleIndexRoute,
+  ConsoleAiGatewayAgentsRoute: ConsoleAiGatewayAgentsRoute,
+  ConsoleAiGatewayEndpointsRoute: ConsoleAiGatewayEndpointsRoute,
+  ConsoleAiGatewayLogsRoute: ConsoleAiGatewayLogsRoute,
+  ConsoleAiGatewayPoliciesRoute: ConsoleAiGatewayPoliciesRoute,
+  ConsoleAiGatewayIndexRoute: ConsoleAiGatewayIndexRoute,
+}
+
+const ConsoleRouteWithChildren =
+  ConsoleRoute._addFileChildren(ConsoleRouteChildren)
+
 interface ApiJobsIdRouteChildren {
   ApiJobsIdCancelRoute: typeof ApiJobsIdCancelRoute
   ApiJobsIdRetryRoute: typeof ApiJobsIdRetryRoute
@@ -1018,8 +1445,10 @@ const ApiKnowledgeSourcesRouteWithChildren =
 const rootRouteChildren: RootRouteChildren = {
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AuthRoute: AuthRoute,
+  ConsoleRoute: ConsoleRouteWithChildren,
   LoginRoute: LoginRoute,
   ResetPasswordRoute: ResetPasswordRoute,
+  ApiChatRoute: ApiChatRoute,
   ApiJobsRoute: ApiJobsRouteWithChildren,
   ApiPromptsRoute: ApiPromptsRouteWithChildren,
   ApiToolsRoute: ApiToolsRouteWithChildren,

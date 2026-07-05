@@ -20,7 +20,7 @@ import { Label } from "@/components/ui/label";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { api, ApiError } from "@/lib/api";
 
-export const Route = createFileRoute("/_app/integrations")({
+export const Route = createFileRoute("/console/integrations")({
   component: IntegrationsPage,
 });
 

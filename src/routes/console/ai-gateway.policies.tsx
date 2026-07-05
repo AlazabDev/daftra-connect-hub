@@ -20,7 +20,7 @@ import { Badge } from "@/components/ui/badge";
 import { listPolicies, upsertPolicy, deletePolicy } from "@/lib/policies.functions";
 import { listEndpoints } from "@/lib/endpoints.functions";
 
-export const Route = createFileRoute("/_app/ai-gateway/policies")({
+export const Route = createFileRoute("/console/ai-gateway/policies")({
   component: PoliciesPage,
 });
 

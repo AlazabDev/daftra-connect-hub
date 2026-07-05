@@ -23,7 +23,7 @@ import { PageHeader, StatCard } from "@/components/console/PageHeader";
 import { Button } from "@/components/ui/button";
 import { getUsageOverview } from "@/lib/usage.functions";
 
-export const Route = createFileRoute("/_app/ai-gateway/")({
+export const Route = createFileRoute("/console/ai-gateway/")({
   component: DashboardPage,
 });
 

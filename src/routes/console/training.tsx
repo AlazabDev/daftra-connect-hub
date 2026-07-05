@@ -22,7 +22,7 @@ import { getToken } from "@/lib/auth";
 import { listAgents } from "@/lib/agents.functions";
 import { listEndpoints } from "@/lib/endpoints.functions";
 
-export const Route = createFileRoute("/_app/training")({
+export const Route = createFileRoute("/console/training")({
   component: TrainingPage,
 });
 

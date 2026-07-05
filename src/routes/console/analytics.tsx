@@ -5,7 +5,7 @@ import { BarChart3, Loader2 } from "lucide-react";
 import { PageHeader, EmptyState, StatCard } from "@/components/console/PageHeader";
 import { api } from "@/lib/api";
 
-export const Route = createFileRoute("/_app/analytics")({
+export const Route = createFileRoute("/console/analytics")({
   component: AnalyticsPage,
 });
 

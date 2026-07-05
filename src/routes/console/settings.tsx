@@ -11,7 +11,7 @@ import { Switch } from "@/components/ui/switch";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { BRANDS, getApiBaseUrl, setApiBaseUrl } from "@/lib/config";
 
-export const Route = createFileRoute("/_app/settings")({
+export const Route = createFileRoute("/console/settings")({
   component: SettingsPage,
 });
 

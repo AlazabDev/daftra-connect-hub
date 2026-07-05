@@ -29,7 +29,7 @@ import { isAuthenticated, clearSession, getUser, hydrateSession } from "@/lib/au
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 
-export const Route = createFileRoute("/_app")({
+export const Route = createFileRoute("/console")({
   beforeLoad: async () => {
     await hydrateSession();
     if (!isAuthenticated()) {
@@ -47,20 +47,20 @@ interface NavItem {
 }
 
 const NAV: NavItem[] = [
-  { to: "/", label: "لوحة التحكم", icon: LayoutDashboard, exact: true },
-  { to: "/chat", label: "المحادثة الذكية", icon: MessagesSquare },
-  { to: "/training", label: "بيئة التدريب", icon: GraduationCap },
-  { to: "/ai-gateway", label: "AI Gateway", icon: Cpu },
-  { to: "/storage", label: "المخازن السحابية", icon: Cloud },
-  { to: "/integrations", label: "الربط والمعرفات", icon: PlugZap },
-  { to: "/data", label: "فحص وتنظيم البيانات", icon: FolderSearch },
-  { to: "/gdrive", label: "Google Drive", icon: HardDrive },
-  { to: "/knowledge", label: "قاعدة المعرفة", icon: Library },
-  { to: "/prompts", label: "استوديو البرومبت", icon: Sparkles },
-  { to: "/tools", label: "أدوات الذكاء الاصطناعي", icon: Boxes },
-  { to: "/jobs", label: "مراقبة الوظائف", icon: Activity },
-  { to: "/analytics", label: "التحليلات", icon: BarChart3 },
-  { to: "/settings", label: "الإعدادات", icon: Settings },
+  { to: "/console", label: "لوحة التحكم", icon: LayoutDashboard, exact: true },
+  { to: "/console/chat", label: "المحادثة الذكية", icon: MessagesSquare },
+  { to: "/console/training", label: "بيئة التدريب", icon: GraduationCap },
+  { to: "/console/ai-gateway", label: "AI Gateway", icon: Cpu },
+  { to: "/console/storage", label: "المخازن السحابية", icon: Cloud },
+  { to: "/console/integrations", label: "الربط والمعرفات", icon: PlugZap },
+  { to: "/console/data", label: "فحص وتنظيم البيانات", icon: FolderSearch },
+  { to: "/console/gdrive", label: "Google Drive", icon: HardDrive },
+  { to: "/console/knowledge", label: "قاعدة المعرفة", icon: Library },
+  { to: "/console/prompts", label: "استوديو البرومبت", icon: Sparkles },
+  { to: "/console/tools", label: "أدوات الذكاء الاصطناعي", icon: Boxes },
+  { to: "/console/jobs", label: "مراقبة الوظائف", icon: Activity },
+  { to: "/console/analytics", label: "التحليلات", icon: BarChart3 },
+  { to: "/console/settings", label: "الإعدادات", icon: Settings },
 ] as const;
 
 function AppLayout() {

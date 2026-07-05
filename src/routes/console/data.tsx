@@ -28,7 +28,7 @@ import { Progress } from "@/components/ui/progress";
 import { api, ApiError } from "@/lib/api";
 import { BRANDS, DEFAULT_BRAND } from "@/lib/config";
 
-export const Route = createFileRoute("/_app/data")({
+export const Route = createFileRoute("/console/data")({
   component: DataPage,
 });
 

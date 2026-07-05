@@ -20,7 +20,7 @@ import {
   deleteStorageProvider, testStorageProvider,
 } from "@/lib/storage-providers.functions";
 
-export const Route = createFileRoute("/_app/storage")({
+export const Route = createFileRoute("/console/storage")({
   component: StoragePage,
 });
 

@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { api, ApiError } from "@/lib/api";
 
-export const Route = createFileRoute("/_app/jobs")({
+export const Route = createFileRoute("/console/jobs")({
   component: JobsPage,
 });
 

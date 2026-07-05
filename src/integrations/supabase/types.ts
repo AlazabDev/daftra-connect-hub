@@ -58,6 +58,252 @@ export type Database = {
           },
         ]
       }
+      ai_agents: {
+        Row: {
+          created_at: string
+          created_by: string | null
+          display_name: string | null
+          enabled: boolean
+          endpoint_id: string | null
+          id: string
+          kind: string
+          model: string | null
+          name: string
+          system_prompt: string | null
+          updated_at: string
+          version: string | null
+        }
+        Insert: {
+          created_at?: string
+          created_by?: string | null
+          display_name?: string | null
+          enabled?: boolean
+          endpoint_id?: string | null
+          id?: string
+          kind: string
+          model?: string | null
+          name: string
+          system_prompt?: string | null
+          updated_at?: string
+          version?: string | null
+        }
+        Update: {
+          created_at?: string
+          created_by?: string | null
+          display_name?: string | null
+          enabled?: boolean
+          endpoint_id?: string | null
+          id?: string
+          kind?: string
+          model?: string | null
+          name?: string
+          system_prompt?: string | null
+          updated_at?: string
+          version?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "ai_agents_endpoint_id_fkey"
+            columns: ["endpoint_id"]
+            isOneToOne: false
+            referencedRelation: "ai_endpoints"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      ai_conversations: {
+        Row: {
+          created_at: string
+          id: string
+          system_prompt: string | null
+          title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          system_prompt?: string | null
+          title?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          system_prompt?: string | null
+          title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      ai_endpoints: {
+        Row: {
+          api_key: string | null
+          api_version: string | null
+          base_url: string | null
+          created_at: string
+          created_by: string | null
+          deployment_name: string | null
+          enabled: boolean
+          extra_headers: Json | null
+          id: string
+          is_default: boolean
+          last_checked_at: string | null
+          last_latency_ms: number | null
+          last_status: string | null
+          model: string
+          name: string
+          provider: string
+          updated_at: string
+          use_apim: boolean
+        }
+        Insert: {
+          api_key?: string | null
+          api_version?: string | null
+          base_url?: string | null
+          created_at?: string
+          created_by?: string | null
+          deployment_name?: string | null
+          enabled?: boolean
+          extra_headers?: Json | null
+          id?: string
+          is_default?: boolean
+          last_checked_at?: string | null
+          last_latency_ms?: number | null
+          last_status?: string | null
+          model: string
+          name: string
+          provider?: string
+          updated_at?: string
+          use_apim?: boolean
+        }
+        Update: {
+          api_key?: string | null
+          api_version?: string | null
+          base_url?: string | null
+          created_at?: string
+          created_by?: string | null
+          deployment_name?: string | null
+          enabled?: boolean
+          extra_headers?: Json | null
+          id?: string
+          is_default?: boolean
+          last_checked_at?: string | null
+          last_latency_ms?: number | null
+          last_status?: string | null
+          model?: string
+          name?: string
+          provider?: string
+          updated_at?: string
+          use_apim?: boolean
+        }
+        Relationships: []
+      }
+      ai_messages: {
+        Row: {
+          content: string
+          conversation_id: string
+          created_at: string
+          id: string
+          metadata: Json | null
+          role: string
+          tokens: number
+          user_id: string | null
+        }
+        Insert: {
+          content?: string
+          conversation_id: string
+          created_at?: string
+          id?: string
+          metadata?: Json | null
+          role: string
+          tokens?: number
+          user_id?: string | null
+        }
+        Update: {
+          content?: string
+          conversation_id?: string
+          created_at?: string
+          id?: string
+          metadata?: Json | null
+          role?: string
+          tokens?: number
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "ai_messages_conversation_id_fkey"
+            columns: ["conversation_id"]
+            isOneToOne: false
+            referencedRelation: "ai_conversations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      ai_usage_logs: {
+        Row: {
+          completion_tokens: number
+          conversation_id: string | null
+          created_at: string
+          endpoint_id: string | null
+          error: string | null
+          flagged: boolean
+          id: string
+          latency_ms: number
+          model: string | null
+          prompt_tokens: number
+          request_id: string | null
+          status: string
+          total_cost_usd: number
+          total_tokens: number
+          user_id: string
+        }
+        Insert: {
+          completion_tokens?: number
+          conversation_id?: string | null
+          created_at?: string
+          endpoint_id?: string | null
+          error?: string | null
+          flagged?: boolean
+          id?: string
+          latency_ms?: number
+          model?: string | null
+          prompt_tokens?: number
+          request_id?: string | null
+          status?: string
+          total_cost_usd?: number
+          total_tokens?: number
+          user_id: string
+        }
+        Update: {
+          completion_tokens?: number
+          conversation_id?: string | null
+          created_at?: string
+          endpoint_id?: string | null
+          error?: string | null
+          flagged?: boolean
+          id?: string
+          latency_ms?: number
+          model?: string | null
+          prompt_tokens?: number
+          request_id?: string | null
+          status?: string
+          total_cost_usd?: number
+          total_tokens?: number
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "ai_usage_logs_endpoint_id_fkey"
+            columns: ["endpoint_id"]
+            isOneToOne: false
+            referencedRelation: "ai_endpoints"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       annotations: {
         Row: {
           color: string | null
@@ -98,6 +344,47 @@ export type Database = {
             columns: ["image_id"]
             isOneToOne: false
             referencedRelation: "images"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      apim_policies: {
+        Row: {
+          applies_to_endpoint_id: string | null
+          config: Json
+          created_at: string
+          enabled: boolean
+          id: string
+          name: string
+          policy_type: string
+          updated_at: string
+        }
+        Insert: {
+          applies_to_endpoint_id?: string | null
+          config?: Json
+          created_at?: string
+          enabled?: boolean
+          id?: string
+          name: string
+          policy_type: string
+          updated_at?: string
+        }
+        Update: {
+          applies_to_endpoint_id?: string | null
+          config?: Json
+          created_at?: string
+          enabled?: boolean
+          id?: string
+          name?: string
+          policy_type?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "apim_policies_applies_to_endpoint_id_fkey"
+            columns: ["applies_to_endpoint_id"]
+            isOneToOne: false
+            referencedRelation: "ai_endpoints"
             referencedColumns: ["id"]
           },
         ]
@@ -313,6 +600,36 @@ export type Database = {
           },
         ]
       }
+      model_pricing: {
+        Row: {
+          created_at: string
+          currency: string
+          id: string
+          input_per_1k: number
+          model: string
+          output_per_1k: number
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          currency?: string
+          id?: string
+          input_per_1k?: number
+          model: string
+          output_per_1k?: number
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          currency?: string
+          id?: string
+          input_per_1k?: number
+          model?: string
+          output_per_1k?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
       projects: {
         Row: {
           category: string | null
@@ -355,6 +672,99 @@ export type Database = {
         }
         Relationships: []
       }
+      rate_limit_counters: {
+        Row: {
+          count: number
+          created_at: string
+          endpoint_id: string | null
+          id: string
+          tokens: number
+          updated_at: string
+          user_id: string
+          window_key: string
+          window_start: string
+        }
+        Insert: {
+          count?: number
+          created_at?: string
+          endpoint_id?: string | null
+          id?: string
+          tokens?: number
+          updated_at?: string
+          user_id: string
+          window_key: string
+          window_start: string
+        }
+        Update: {
+          count?: number
+          created_at?: string
+          endpoint_id?: string | null
+          id?: string
+          tokens?: number
+          updated_at?: string
+          user_id?: string
+          window_key?: string
+          window_start?: string
+        }
+        Relationships: []
+      }
+      storage_providers: {
+        Row: {
+          config: Json
+          created_at: string
+          created_by: string | null
+          display_name: string
+          enabled: boolean
+          id: string
+          is_default: boolean
+          provider: string
+          updated_at: string
+        }
+        Insert: {
+          config?: Json
+          created_at?: string
+          created_by?: string | null
+          display_name: string
+          enabled?: boolean
+          id?: string
+          is_default?: boolean
+          provider: string
+          updated_at?: string
+        }
+        Update: {
+          config?: Json
+          created_at?: string
+          created_by?: string | null
+          display_name?: string
+          enabled?: boolean
+          id?: string
+          is_default?: boolean
+          provider?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          created_at: string
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       comments_public: {
@@ -394,10 +804,16 @@ export type Database = {
       }
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "moderator" | "user"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -524,6 +940,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "moderator", "user"],
+    },
   },
 } as const

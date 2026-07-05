@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 
-export const Route = createFileRoute("/_app/gdrive")({
+export const Route = createFileRoute("/console/gdrive")({
   component: GDrivePage,
 });
 

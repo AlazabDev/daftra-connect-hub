@@ -17,7 +17,7 @@ import {
 import { PageHeader, StatCard, EmptyState } from "@/components/console/PageHeader";
 import { api } from "@/lib/api";
 
-export const Route = createFileRoute("/_app/")({
+export const Route = createFileRoute("/console/")({
   component: DashboardPage,
 });
 

@@ -24,7 +24,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-export const Route = createFileRoute("/_app/chat")({
+export const Route = createFileRoute("/console/chat")({
   component: ChatPage,
 });
 
