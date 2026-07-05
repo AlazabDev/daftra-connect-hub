@@ -1,4 +1,5 @@
 import { createServerFn } from "@tanstack/react-start";
+import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 import { DAFTRA_TOOLS, findTool, type DaftraTool } from "./api-map";
 
 function baseUrl(version: "v1" | "v2", subdomain: string) {
