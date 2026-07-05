@@ -1,11 +1,14 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { jsonOk, jsonErr } from "@/lib/azure.server";
 import { listFiles } from "@/lib/gdrive.server";
+import { authUserId } from "@/lib/auth-helper.server";
 
 export const Route = createFileRoute("/api/gdrive/files")({
   server: {
     handlers: {
       GET: async ({ request }) => {
+        const userId = await authUserId(request);
+        if (!userId) return jsonErr(401, "Unauthorized");
         const url = new URL(request.url);
         const q = url.searchParams.get("q") ?? undefined;
         const pageToken = url.searchParams.get("pageToken") ?? undefined;

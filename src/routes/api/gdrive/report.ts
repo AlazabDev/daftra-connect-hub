@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { jsonOk, jsonErr, readAzureConfig, currentMode } from "@/lib/azure.server";
 import { getFileMeta, extractText } from "@/lib/gdrive.server";
+import { authUserId } from "@/lib/auth-helper.server";
 
 interface Body {
   fileIds?: string[];
@@ -40,6 +41,8 @@ export const Route = createFileRoute("/api/gdrive/report")({
   server: {
     handlers: {
       POST: async ({ request }) => {
+        const userId = await authUserId(request);
+        if (!userId) return jsonErr(401, "Unauthorized");
         let body: Body = {};
         try { body = (await request.json()) as Body; } catch { return jsonErr(400, "JSON غير صالح"); }
         const ids = (body.fileIds ?? []).filter(Boolean);

@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { currentMode, jsonOk, jsonErr, readAzureConfig } from "@/lib/azure.server";
+import { authUserId } from "@/lib/auth-helper.server";
 
 interface ChatBody {
   message?: string;
@@ -42,6 +43,8 @@ export const Route = createFileRoute("/api/ai/chat")({
   server: {
     handlers: {
       POST: async ({ request }) => {
+        const userId = await authUserId(request);
+        if (!userId) return jsonErr(401, "Unauthorized");
         let body: ChatBody = {};
         try { body = (await request.json()) as ChatBody; } catch {
           return jsonErr(400, "JSON غير صالح");
