@@ -85,7 +85,7 @@ function Group({ label, items, currentPath }: { label: string; items: Item[]; cu
 export function AppSidebar() {
   const currentPath = useRouterState({ select: (r) => r.location.pathname });
   return (
-    <Sidebar collapsible="icon">
+    <Sidebar collapsible="icon" side="left">
       <SidebarContent>
         <Group label="الرئيسية" items={mainItems} currentPath={currentPath} />
         <Group label="الكونسول" items={consoleItems} currentPath={currentPath} />
