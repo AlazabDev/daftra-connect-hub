@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { jsonOk, jsonErr, readAzureConfig, currentMode } from "@/lib/azure.server";
 import { getFileMeta, extractText } from "@/lib/gdrive.server";
+import { authUserId } from "@/lib/auth-helper.server";
 
 interface Body {
   fileIds?: string[];
