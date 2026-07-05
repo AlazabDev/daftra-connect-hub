@@ -41,6 +41,8 @@ export const Route = createFileRoute("/api/gdrive/report")({
   server: {
     handlers: {
       POST: async ({ request }) => {
+        const userId = await authUserId(request);
+        if (!userId) return jsonErr(401, "Unauthorized");
         let body: Body = {};
         try { body = (await request.json()) as Body; } catch { return jsonErr(400, "JSON غير صالح"); }
         const ids = (body.fileIds ?? []).filter(Boolean);
