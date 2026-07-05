@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { currentMode, jsonOk, jsonErr, readAzureConfig } from "@/lib/azure.server";
+import { authUserId } from "@/lib/auth-helper.server";
 
 interface ChatBody {
   message?: string;
