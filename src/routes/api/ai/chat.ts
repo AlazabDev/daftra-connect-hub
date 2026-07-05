@@ -43,6 +43,8 @@ export const Route = createFileRoute("/api/ai/chat")({
   server: {
     handlers: {
       POST: async ({ request }) => {
+        const userId = await authUserId(request);
+        if (!userId) return jsonErr(401, "Unauthorized");
         let body: ChatBody = {};
         try { body = (await request.json()) as ChatBody; } catch {
           return jsonErr(400, "JSON غير صالح");
