@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { jsonOk, jsonErr } from "@/lib/azure.server";
 import { listFiles } from "@/lib/gdrive.server";
+import { authUserId } from "@/lib/auth-helper.server";
 
 export const Route = createFileRoute("/api/gdrive/files")({
   server: {
