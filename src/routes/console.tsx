@@ -23,6 +23,7 @@ import {
   Cloud,
   Cpu,
   GraduationCap,
+  Network,
 } from "lucide-react";
 
 import { isAuthenticated, clearSession, getUser, hydrateSession } from "@/lib/auth";
