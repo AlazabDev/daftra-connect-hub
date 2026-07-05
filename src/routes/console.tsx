@@ -33,7 +33,7 @@ export const Route = createFileRoute("/console")({
   beforeLoad: async () => {
     await hydrateSession();
     if (!isAuthenticated()) {
-      throw redirect({ to: "/console/login" });
+      throw redirect({ to: "/login" });
     }
   },
   component: AppLayout,
@@ -47,7 +47,7 @@ interface NavItem {
 }
 
 const NAV: NavItem[] = [
-  { to: "/console/console", label: "لوحة التحكم", icon: LayoutDashboard, exact: true },
+  { to: "/console", label: "لوحة التحكم", icon: LayoutDashboard, exact: true },
   { to: "/console/chat", label: "المحادثة الذكية", icon: MessagesSquare },
   { to: "/console/training", label: "بيئة التدريب", icon: GraduationCap },
   { to: "/console/ai-gateway", label: "AI Gateway", icon: Cpu },
@@ -70,7 +70,7 @@ function AppLayout() {
 
   async function handleLogout() {
     await clearSession();
-    navigate({ to: "/console/login" });
+    navigate({ to: "/login" });
   }
 
   return (
