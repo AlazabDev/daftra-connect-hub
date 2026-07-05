@@ -202,7 +202,10 @@ async function handleRpc(body: JsonRpc, request: Request): Promise<Response> {
       // ---- Daftra bridge ----
       if (name.startsWith("daftra.")) {
         const bare = name.slice("daftra.".length);
-        const alazabKey = request.headers.get("x-alazab-key") ?? process.env.ALAZAB_MCP_PRIVATE_KEY ?? "";
+        const alazabKey = request.headers.get("x-alazab-key") ?? "";
+        if (!alazabKey) {
+          return rpcOk(id, toText({ ok: false, error: "X-Alazab-Key header مطلوب لاستدعاء أدوات دفترة" }, true));
+        }
         const res = await callDaftraTool({
           data: {
             tool: bare,
