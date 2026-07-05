@@ -42,6 +42,10 @@ const consoleItems: Item[] = [
   { title: "المحادثة الذكية", url: "/console/chat", icon: MessagesSquare },
   { title: "بيئة التدريب", url: "/console/training", icon: GraduationCap },
   { title: "AI Gateway", url: "/console/ai-gateway", icon: Cpu },
+  { title: "  ↳ الوكلاء", url: "/console/ai-gateway/agents", icon: Boxes },
+  { title: "  ↳ النهايات", url: "/console/ai-gateway/endpoints", icon: PlugZap },
+  { title: "  ↳ السياسات", url: "/console/ai-gateway/policies", icon: Wrench },
+  { title: "  ↳ السجلات", url: "/console/ai-gateway/logs", icon: Activity },
   { title: "المخازن السحابية", url: "/console/storage", icon: Cloud },
   { title: "الربط والمعرفات", url: "/console/integrations", icon: PlugZap },
   { title: "فحص البيانات", url: "/console/data", icon: FolderSearch },
@@ -81,7 +85,7 @@ function Group({ label, items, currentPath }: { label: string; items: Item[]; cu
 export function AppSidebar() {
   const currentPath = useRouterState({ select: (r) => r.location.pathname });
   return (
-    <Sidebar collapsible="icon">
+    <Sidebar collapsible="icon" side="left">
       <SidebarContent>
         <Group label="الرئيسية" items={mainItems} currentPath={currentPath} />
         <Group label="الكونسول" items={consoleItems} currentPath={currentPath} />
