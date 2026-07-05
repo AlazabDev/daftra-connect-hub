@@ -7,7 +7,7 @@ import { PageHeader, EmptyState } from "@/components/console/PageHeader";
 import { Button } from "@/components/ui/button";
 import { api, ApiError } from "@/lib/api";
 
-export const Route = createFileRoute("/_app/tools")({
+export const Route = createFileRoute("/console/tools")({
   component: ToolsPage,
 });
 

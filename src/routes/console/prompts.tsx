@@ -14,7 +14,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { api, ApiError } from "@/lib/api";
 import { BRANDS, DEFAULT_BRAND } from "@/lib/config";
 
-export const Route = createFileRoute("/_app/prompts")({
+export const Route = createFileRoute("/console/prompts")({
   component: PromptsPage,
 });
 

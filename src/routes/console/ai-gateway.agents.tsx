@@ -21,7 +21,7 @@ import {
 import { listAgents, upsertAgent, deleteAgent } from "@/lib/agents.functions";
 import { listEndpoints } from "@/lib/endpoints.functions";
 
-export const Route = createFileRoute("/_app/ai-gateway/agents")({
+export const Route = createFileRoute("/console/ai-gateway/agents")({
   component: AgentsPage,
 });
 

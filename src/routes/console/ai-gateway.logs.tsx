@@ -6,7 +6,7 @@ import { PageHeader } from "@/components/console/PageHeader";
 import { Badge } from "@/components/ui/badge";
 import { listRecentLogs } from "@/lib/usage.functions";
 
-export const Route = createFileRoute("/_app/ai-gateway/logs")({
+export const Route = createFileRoute("/console/ai-gateway/logs")({
   component: LogsPage,
 });
 

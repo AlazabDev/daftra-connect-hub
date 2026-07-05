@@ -26,7 +26,7 @@ import {
   listEndpoints, upsertEndpoint, deleteEndpoint, testEndpoint, testAllEndpoints,
 } from "@/lib/endpoints.functions";
 
-export const Route = createFileRoute("/_app/ai-gateway/endpoints")({
+export const Route = createFileRoute("/console/ai-gateway/endpoints")({
   component: EndpointsPage,
 });
 
