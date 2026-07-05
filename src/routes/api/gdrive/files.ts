@@ -7,6 +7,8 @@ export const Route = createFileRoute("/api/gdrive/files")({
   server: {
     handlers: {
       GET: async ({ request }) => {
+        const userId = await authUserId(request);
+        if (!userId) return jsonErr(401, "Unauthorized");
         const url = new URL(request.url);
         const q = url.searchParams.get("q") ?? undefined;
         const pageToken = url.searchParams.get("pageToken") ?? undefined;
