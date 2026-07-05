@@ -129,14 +129,18 @@ export const callDaftraTool = createServerFn({ method: "POST" })
   });
 
 export const listAuditLog = createServerFn({ method: "GET" }).handler(async () => {
-  const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-  const { data, error } = await supabaseAdmin
-    .from("daftra_audit_log")
-    .select("*")
-    .order("created_at", { ascending: false })
-    .limit(100);
-  if (error) return { entries: [], error: error.message };
-  return { entries: data ?? [] };
+  try {
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const { data, error } = await supabaseAdmin
+      .from("daftra_audit_log")
+      .select("*")
+      .order("created_at", { ascending: false })
+      .limit(100);
+    if (error) return { entries: [], error: error.message };
+    return { entries: data ?? [] };
+  } catch (e) {
+    return { entries: [], error: e instanceof Error ? e.message : String(e) };
+  }
 });
 
 type TestInput = { alazabKey: string };
