@@ -148,8 +148,21 @@ async function handleRpc(body: JsonRpc, request: Request): Promise<Response> {
     try {
       // ---- A2A ----
       if (name === "agent.register") {
+        const agent_id = String(args.agent_id ?? "");
+        if (!agent_id) return rpcOk(id, toText({ ok: false, error: "agent_id مطلوب" }, true));
+        // Prevent identity takeover: block re-registration of existing agent_ids via the
+        // unauthenticated public endpoint. Owners must use the authenticated GUI path.
+        const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+        const { data: existing } = await supabaseAdmin
+          .from("foundry_agents")
+          .select("agent_id")
+          .eq("agent_id", agent_id)
+          .maybeSingle();
+        if (existing) {
+          return rpcOk(id, toText({ ok: false, error: "agent_id مسجّل مسبقًا — استخدم الواجهة المصادَق عليها لإعادة التسجيل" }, true));
+        }
         const r = await a2aRegisterAgent({
-          agent_id: String(args.agent_id ?? ""),
+          agent_id,
           name: String(args.name ?? ""),
           description: args.description as string | undefined,
           capabilities: (args.capabilities as string[] | undefined) ?? [],
