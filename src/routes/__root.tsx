@@ -80,10 +80,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { title: "Daftra MCP — لوحة العزب" },
       { name: "description", content: "طبقة حوكمة MCP لدفترة: أدوات، اختبار، سجل تدقيق، ومسار JSON-RPC" },
       { name: "author", content: "Alazab" },
-      { property: "og:title", content: "Daftra MCP Governance" },
-      { property: "og:description", content: "طبقة حوكمة MCP لدفترة (Alazab)" },
+      { property: "og:title", content: "Daftra MCP — لوحة العزب" },
+      { property: "og:description", content: "طبقة حوكمة MCP لدفترة: أدوات، اختبار، سجل تدقيق، ومسار JSON-RPC" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Daftra MCP — لوحة العزب" },
+      { name: "twitter:description", content: "طبقة حوكمة MCP لدفترة: أدوات، اختبار، سجل تدقيق، ومسار JSON-RPC" },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/d04e8054-528a-49c9-a39c-cefece61b1d8/id-preview-8abd24a8--90df6f9e-e3ff-4d77-a314-35c9579089f4.lovable.app-1783205106943.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/d04e8054-528a-49c9-a39c-cefece61b1d8/id-preview-8abd24a8--90df6f9e-e3ff-4d77-a314-35c9579089f4.lovable.app-1783205106943.png" },
     ],
     links: [
       {
