@@ -46,6 +46,7 @@ const consoleItems: Item[] = [
   { title: "  ↳ النهايات", url: "/console/ai-gateway/endpoints", icon: PlugZap },
   { title: "  ↳ السياسات", url: "/console/ai-gateway/policies", icon: Wrench },
   { title: "  ↳ السجلات", url: "/console/ai-gateway/logs", icon: Activity },
+  { title: "الموارد", url: "/console/resources", icon: Boxes },
   { title: "المخازن السحابية", url: "/console/storage", icon: Cloud },
   { title: "الربط والمعرفات", url: "/console/integrations", icon: PlugZap },
   { title: "فحص البيانات", url: "/console/data", icon: FolderSearch },
