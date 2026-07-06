@@ -354,6 +354,47 @@ export async function callAzureStream(
   return r;
 }
 
+/* ---------------- Ollama (OpenAI-compatible /v1/chat/completions) ---------------- */
+function buildOllamaHeaders(ep: Endpoint): Record<string, string> {
+  const headers: Record<string, string> = { "Content-Type": "application/json" };
+  const user = process.env.OLLAMA_USERNAME;
+  const pass = process.env.OLLAMA_PASSWORD;
+  if (user && pass) {
+    headers["Authorization"] = "Basic " + btoa(`${user}:${pass}`);
+  }
+  const key = ep.api_key ?? process.env.OLLAMA_API_KEY;
+  if (key) headers["Authorization"] = `Bearer ${key}`;
+  if (ep.extra_headers && typeof ep.extra_headers === "object") {
+    for (const [k, v] of Object.entries(ep.extra_headers)) {
+      if (typeof v === "string") headers[k] = v;
+    }
+  }
+  return headers;
+}
+
+export async function callOllamaStream(
+  ep: Endpoint,
+  messages: ChatMsg[],
+): Promise<Response> {
+  const base = (ep.base_url ?? process.env.OLLAMA_BASE_URL ?? "").replace(/\/$/, "");
+  const url = `${base}/v1/chat/completions`;
+  return fetch(url, {
+    method: "POST",
+    headers: buildOllamaHeaders(ep),
+    body: JSON.stringify({
+      model: ep.model,
+      messages,
+      stream: true,
+    }),
+  });
+}
+
+/* Dispatcher — routes by provider */
+export async function callChatStream(ep: Endpoint, messages: ChatMsg[]): Promise<Response> {
+  if (ep.provider === "ollama") return callOllamaStream(ep, messages);
+  return callAzureStream(ep, messages);
+}
+
 /* ---------------- Main entrypoint: guarded streaming ---------------- */
 
 export interface StreamGuardResult {
