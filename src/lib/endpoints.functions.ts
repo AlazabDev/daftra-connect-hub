@@ -25,7 +25,7 @@ export const listEndpoints = createServerFn({ method: "GET" })
 const endpointSchema = z.object({
   id: z.string().uuid().optional(),
   name: z.string().min(1).max(100),
-  provider: z.enum(["azure_openai", "openai", "lovable", "apim"]),
+  provider: z.enum(["azure_openai", "openai", "lovable", "apim", "ollama"]),
   base_url: z.string().url().nullable().optional().or(z.literal("")),
   deployment_name: z.string().max(100).nullable().optional(),
   model: z.string().min(1).max(100),
