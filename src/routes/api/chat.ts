@@ -9,7 +9,7 @@ import { createClient } from "@supabase/supabase-js";
 import type { Database } from "@/integrations/supabase/types";
 import {
   preflight,
-  callAzureStream,
+  callChatStream,
   logUsage,
   incrementRateLimit,
   computeCost,
@@ -126,7 +126,7 @@ export const Route = createFileRoute("/api/chat")({
         const started = Date.now();
         let upstream: Response;
         try {
-          upstream = await callAzureStream(pre.endpoint, messages);
+          upstream = await callChatStream(pre.endpoint, messages);
         } catch (e) {
           cbFail(pre.endpoint.id);
           const err = e instanceof Error ? e.message : String(e);
