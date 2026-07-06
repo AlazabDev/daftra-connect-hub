@@ -25,7 +25,7 @@ export const listEndpoints = createServerFn({ method: "GET" })
 const endpointSchema = z.object({
   id: z.string().uuid().optional(),
   name: z.string().min(1).max(100),
-  provider: z.enum(["azure_openai", "openai", "lovable", "apim"]),
+  provider: z.enum(["azure_openai", "openai", "lovable", "apim", "ollama"]),
   base_url: z.string().url().nullable().optional().or(z.literal("")),
   deployment_name: z.string().max(100).nullable().optional(),
   model: z.string().min(1).max(100),
@@ -71,11 +71,11 @@ export const deleteEndpoint = createServerFn({ method: "POST" })
   });
 
 async function pingEndpoint(id: string) {
-  const { getEndpoint, callAzureStream } = await import("@/lib/ai-gateway.server");
+  const { getEndpoint, callChatStream } = await import("@/lib/ai-gateway.server");
   const ep = await getEndpoint(id);
   const started = Date.now();
   try {
-    const r = await callAzureStream(ep, [{ role: "user", content: "ping" }]);
+    const r = await callChatStream(ep, [{ role: "user", content: "ping" }]);
     const latency = Date.now() - started;
     if (!r.ok) {
       const t = await r.text().catch(() => "");

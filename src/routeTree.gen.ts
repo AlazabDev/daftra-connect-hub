@@ -20,6 +20,7 @@ import { Route as ConsoleTrainingRouteImport } from './routes/console/training'
 import { Route as ConsoleToolsRouteImport } from './routes/console/tools'
 import { Route as ConsoleStorageRouteImport } from './routes/console/storage'
 import { Route as ConsoleSettingsRouteImport } from './routes/console/settings'
+import { Route as ConsoleResourcesRouteImport } from './routes/console/resources'
 import { Route as ConsolePromptsRouteImport } from './routes/console/prompts'
 import { Route as ConsoleKnowledgeRouteImport } from './routes/console/knowledge'
 import { Route as ConsoleJobsRouteImport } from './routes/console/jobs'
@@ -126,6 +127,11 @@ const ConsoleStorageRoute = ConsoleStorageRouteImport.update({
 const ConsoleSettingsRoute = ConsoleSettingsRouteImport.update({
   id: '/settings',
   path: '/settings',
+  getParentRoute: () => ConsoleRoute,
+} as any)
+const ConsoleResourcesRoute = ConsoleResourcesRouteImport.update({
+  id: '/resources',
+  path: '/resources',
   getParentRoute: () => ConsoleRoute,
 } as any)
 const ConsolePromptsRoute = ConsolePromptsRouteImport.update({
@@ -419,6 +425,7 @@ export interface FileRoutesByFullPath {
   '/console/jobs': typeof ConsoleJobsRoute
   '/console/knowledge': typeof ConsoleKnowledgeRoute
   '/console/prompts': typeof ConsolePromptsRoute
+  '/console/resources': typeof ConsoleResourcesRoute
   '/console/settings': typeof ConsoleSettingsRoute
   '/console/storage': typeof ConsoleStorageRoute
   '/console/tools': typeof ConsoleToolsRoute
@@ -482,6 +489,7 @@ export interface FileRoutesByTo {
   '/console/jobs': typeof ConsoleJobsRoute
   '/console/knowledge': typeof ConsoleKnowledgeRoute
   '/console/prompts': typeof ConsolePromptsRoute
+  '/console/resources': typeof ConsoleResourcesRoute
   '/console/settings': typeof ConsoleSettingsRoute
   '/console/storage': typeof ConsoleStorageRoute
   '/console/tools': typeof ConsoleToolsRoute
@@ -549,6 +557,7 @@ export interface FileRoutesById {
   '/console/jobs': typeof ConsoleJobsRoute
   '/console/knowledge': typeof ConsoleKnowledgeRoute
   '/console/prompts': typeof ConsolePromptsRoute
+  '/console/resources': typeof ConsoleResourcesRoute
   '/console/settings': typeof ConsoleSettingsRoute
   '/console/storage': typeof ConsoleStorageRoute
   '/console/tools': typeof ConsoleToolsRoute
@@ -617,6 +626,7 @@ export interface FileRouteTypes {
     | '/console/jobs'
     | '/console/knowledge'
     | '/console/prompts'
+    | '/console/resources'
     | '/console/settings'
     | '/console/storage'
     | '/console/tools'
@@ -680,6 +690,7 @@ export interface FileRouteTypes {
     | '/console/jobs'
     | '/console/knowledge'
     | '/console/prompts'
+    | '/console/resources'
     | '/console/settings'
     | '/console/storage'
     | '/console/tools'
@@ -746,6 +757,7 @@ export interface FileRouteTypes {
     | '/console/jobs'
     | '/console/knowledge'
     | '/console/prompts'
+    | '/console/resources'
     | '/console/settings'
     | '/console/storage'
     | '/console/tools'
@@ -904,6 +916,13 @@ declare module '@tanstack/react-router' {
       path: '/settings'
       fullPath: '/console/settings'
       preLoaderRoute: typeof ConsoleSettingsRouteImport
+      parentRoute: typeof ConsoleRoute
+    }
+    '/console/resources': {
+      id: '/console/resources'
+      path: '/resources'
+      fullPath: '/console/resources'
+      preLoaderRoute: typeof ConsoleResourcesRouteImport
       parentRoute: typeof ConsoleRoute
     }
     '/console/prompts': {
@@ -1304,6 +1323,7 @@ interface ConsoleRouteChildren {
   ConsoleJobsRoute: typeof ConsoleJobsRoute
   ConsoleKnowledgeRoute: typeof ConsoleKnowledgeRoute
   ConsolePromptsRoute: typeof ConsolePromptsRoute
+  ConsoleResourcesRoute: typeof ConsoleResourcesRoute
   ConsoleSettingsRoute: typeof ConsoleSettingsRoute
   ConsoleStorageRoute: typeof ConsoleStorageRoute
   ConsoleToolsRoute: typeof ConsoleToolsRoute
@@ -1325,6 +1345,7 @@ const ConsoleRouteChildren: ConsoleRouteChildren = {
   ConsoleJobsRoute: ConsoleJobsRoute,
   ConsoleKnowledgeRoute: ConsoleKnowledgeRoute,
   ConsolePromptsRoute: ConsolePromptsRoute,
+  ConsoleResourcesRoute: ConsoleResourcesRoute,
   ConsoleSettingsRoute: ConsoleSettingsRoute,
   ConsoleStorageRoute: ConsoleStorageRoute,
   ConsoleToolsRoute: ConsoleToolsRoute,
