@@ -23,6 +23,17 @@ import {
   Briefcase,
 } from "lucide-react";
 
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarGroup,
+  SidebarGroupContent,
+  SidebarGroupLabel,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+} from "@/components/ui/sidebar";
+
 type Item = { title: string; url: string; icon: typeof LayoutDashboard; exact?: boolean };
 
 const mainItems: Item[] = [
