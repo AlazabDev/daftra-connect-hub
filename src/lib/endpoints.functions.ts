@@ -75,7 +75,7 @@ async function pingEndpoint(id: string) {
   const ep = await getEndpoint(id);
   const started = Date.now();
   try {
-    const r = await callAzureStream(ep, [{ role: "user", content: "ping" }]);
+    const r = await callChatStream(ep, [{ role: "user", content: "ping" }]);
     const latency = Date.now() - started;
     if (!r.ok) {
       const t = await r.text().catch(() => "");
