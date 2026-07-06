@@ -71,7 +71,7 @@ export const deleteEndpoint = createServerFn({ method: "POST" })
   });
 
 async function pingEndpoint(id: string) {
-  const { getEndpoint, callAzureStream } = await import("@/lib/ai-gateway.server");
+  const { getEndpoint, callChatStream } = await import("@/lib/ai-gateway.server");
   const ep = await getEndpoint(id);
   const started = Date.now();
   try {
