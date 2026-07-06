@@ -16,18 +16,12 @@ import {
   Settings,
   Network,
   Wrench,
+  Users,
+  ShieldCheck,
+  ScrollText,
+  Server,
+  Briefcase,
 } from "lucide-react";
-
-import {
-  Sidebar,
-  SidebarContent,
-  SidebarGroup,
-  SidebarGroupContent,
-  SidebarGroupLabel,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-} from "@/components/ui/sidebar";
 
 type Item = { title: string; url: string; icon: typeof LayoutDashboard; exact?: boolean };
 
@@ -42,11 +36,11 @@ const consoleItems: Item[] = [
   { title: "المحادثة الذكية", url: "/console/chat", icon: MessagesSquare },
   { title: "بيئة التدريب", url: "/console/training", icon: GraduationCap },
   { title: "AI Gateway", url: "/console/ai-gateway", icon: Cpu },
-  { title: "  ↳ الوكلاء", url: "/console/ai-gateway/agents", icon: Boxes },
-  { title: "  ↳ النهايات", url: "/console/ai-gateway/endpoints", icon: PlugZap },
-  { title: "  ↳ السياسات", url: "/console/ai-gateway/policies", icon: Wrench },
-  { title: "  ↳ السجلات", url: "/console/ai-gateway/logs", icon: Activity },
-  { title: "الموارد", url: "/console/resources", icon: Boxes },
+  { title: "الوكلاء", url: "/console/ai-gateway/agents", icon: Users },
+  { title: "النهايات", url: "/console/ai-gateway/endpoints", icon: PlugZap },
+  { title: "السياسات", url: "/console/ai-gateway/policies", icon: ShieldCheck },
+  { title: "السجلات", url: "/console/ai-gateway/logs", icon: ScrollText },
+  { title: "الموارد", url: "/console/resources", icon: Server },
   { title: "المخازن السحابية", url: "/console/storage", icon: Cloud },
   { title: "الربط والمعرفات", url: "/console/integrations", icon: PlugZap },
   { title: "فحص البيانات", url: "/console/data", icon: FolderSearch },
