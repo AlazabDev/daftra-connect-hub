@@ -53,7 +53,7 @@ function SignOutButton() {
       size="sm"
       onClick={async () => {
         await supabase.auth.signOut();
-        navigate({ to: "/auth", replace: true });
+        navigate({ to: "/login", replace: true });
       }}
     >
       تسجيل الخروج
