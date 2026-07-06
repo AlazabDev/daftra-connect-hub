@@ -243,6 +243,7 @@ function EndpointsPage() {
                     <SelectItem value="openai">OpenAI</SelectItem>
                     <SelectItem value="apim">Azure APIM</SelectItem>
                     <SelectItem value="lovable">Lovable AI</SelectItem>
+                    <SelectItem value="ollama">Ollama (Local)</SelectItem>
                   </SelectContent>
                 </Select>
               </Field>
