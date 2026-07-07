@@ -1,9 +1,5 @@
-# Plan
+# Legacy APIM sample
 
-- Build an app - CHECK
-- Create either ARM or Bicep files
-    - create resources for APIM and Azure Open AI instance - TODAY
-    - read about managed identity - THIS WEEK
-    - add APIs and operations to APIM - TOMORROW
-    - add policies - THIS WEEK
-    - add user managed identity - BEFORE BUILD
+This directory contains the old Express + static web APIM sample that was previously duplicated under `src/`.
+
+It is kept here only as a reference. The production application is the TanStack Start app at the repository root.
