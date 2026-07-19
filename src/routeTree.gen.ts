@@ -25,11 +25,13 @@ import { Route as ConsolePromptsRouteImport } from './routes/console/prompts'
 import { Route as ConsoleKnowledgeRouteImport } from './routes/console/knowledge'
 import { Route as ConsoleJobsRouteImport } from './routes/console/jobs'
 import { Route as ConsoleIntegrationsRouteImport } from './routes/console/integrations'
+import { Route as ConsoleHealthRouteImport } from './routes/console/health'
 import { Route as ConsoleGdriveRouteImport } from './routes/console/gdrive'
 import { Route as ConsoleDataRouteImport } from './routes/console/data'
 import { Route as ConsoleChatRouteImport } from './routes/console/chat'
 import { Route as ConsoleAnalyticsRouteImport } from './routes/console/analytics'
 import { Route as ApiToolsRouteImport } from './routes/api/tools'
+import { Route as ApiSystemHealthRouteImport } from './routes/api/system-health'
 import { Route as ApiPromptsRouteImport } from './routes/api/prompts'
 import { Route as ApiJobsRouteImport } from './routes/api/jobs'
 import { Route as ApiChatRouteImport } from './routes/api/chat'
@@ -154,6 +156,11 @@ const ConsoleIntegrationsRoute = ConsoleIntegrationsRouteImport.update({
   path: '/integrations',
   getParentRoute: () => ConsoleRoute,
 } as any)
+const ConsoleHealthRoute = ConsoleHealthRouteImport.update({
+  id: '/health',
+  path: '/health',
+  getParentRoute: () => ConsoleRoute,
+} as any)
 const ConsoleGdriveRoute = ConsoleGdriveRouteImport.update({
   id: '/gdrive',
   path: '/gdrive',
@@ -177,6 +184,11 @@ const ConsoleAnalyticsRoute = ConsoleAnalyticsRouteImport.update({
 const ApiToolsRoute = ApiToolsRouteImport.update({
   id: '/api/tools',
   path: '/api/tools',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiSystemHealthRoute = ApiSystemHealthRouteImport.update({
+  id: '/api/system-health',
+  path: '/api/system-health',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiPromptsRoute = ApiPromptsRouteImport.update({
@@ -416,11 +428,13 @@ export interface FileRoutesByFullPath {
   '/api/chat': typeof ApiChatRoute
   '/api/jobs': typeof ApiJobsRouteWithChildren
   '/api/prompts': typeof ApiPromptsRouteWithChildren
+  '/api/system-health': typeof ApiSystemHealthRoute
   '/api/tools': typeof ApiToolsRouteWithChildren
   '/console/analytics': typeof ConsoleAnalyticsRoute
   '/console/chat': typeof ConsoleChatRoute
   '/console/data': typeof ConsoleDataRoute
   '/console/gdrive': typeof ConsoleGdriveRoute
+  '/console/health': typeof ConsoleHealthRoute
   '/console/integrations': typeof ConsoleIntegrationsRoute
   '/console/jobs': typeof ConsoleJobsRoute
   '/console/knowledge': typeof ConsoleKnowledgeRoute
@@ -480,11 +494,13 @@ export interface FileRoutesByTo {
   '/api/chat': typeof ApiChatRoute
   '/api/jobs': typeof ApiJobsRouteWithChildren
   '/api/prompts': typeof ApiPromptsRouteWithChildren
+  '/api/system-health': typeof ApiSystemHealthRoute
   '/api/tools': typeof ApiToolsRouteWithChildren
   '/console/analytics': typeof ConsoleAnalyticsRoute
   '/console/chat': typeof ConsoleChatRoute
   '/console/data': typeof ConsoleDataRoute
   '/console/gdrive': typeof ConsoleGdriveRoute
+  '/console/health': typeof ConsoleHealthRoute
   '/console/integrations': typeof ConsoleIntegrationsRoute
   '/console/jobs': typeof ConsoleJobsRoute
   '/console/knowledge': typeof ConsoleKnowledgeRoute
@@ -548,11 +564,13 @@ export interface FileRoutesById {
   '/api/chat': typeof ApiChatRoute
   '/api/jobs': typeof ApiJobsRouteWithChildren
   '/api/prompts': typeof ApiPromptsRouteWithChildren
+  '/api/system-health': typeof ApiSystemHealthRoute
   '/api/tools': typeof ApiToolsRouteWithChildren
   '/console/analytics': typeof ConsoleAnalyticsRoute
   '/console/chat': typeof ConsoleChatRoute
   '/console/data': typeof ConsoleDataRoute
   '/console/gdrive': typeof ConsoleGdriveRoute
+  '/console/health': typeof ConsoleHealthRoute
   '/console/integrations': typeof ConsoleIntegrationsRoute
   '/console/jobs': typeof ConsoleJobsRoute
   '/console/knowledge': typeof ConsoleKnowledgeRoute
@@ -617,11 +635,13 @@ export interface FileRouteTypes {
     | '/api/chat'
     | '/api/jobs'
     | '/api/prompts'
+    | '/api/system-health'
     | '/api/tools'
     | '/console/analytics'
     | '/console/chat'
     | '/console/data'
     | '/console/gdrive'
+    | '/console/health'
     | '/console/integrations'
     | '/console/jobs'
     | '/console/knowledge'
@@ -681,11 +701,13 @@ export interface FileRouteTypes {
     | '/api/chat'
     | '/api/jobs'
     | '/api/prompts'
+    | '/api/system-health'
     | '/api/tools'
     | '/console/analytics'
     | '/console/chat'
     | '/console/data'
     | '/console/gdrive'
+    | '/console/health'
     | '/console/integrations'
     | '/console/jobs'
     | '/console/knowledge'
@@ -748,11 +770,13 @@ export interface FileRouteTypes {
     | '/api/chat'
     | '/api/jobs'
     | '/api/prompts'
+    | '/api/system-health'
     | '/api/tools'
     | '/console/analytics'
     | '/console/chat'
     | '/console/data'
     | '/console/gdrive'
+    | '/console/health'
     | '/console/integrations'
     | '/console/jobs'
     | '/console/knowledge'
@@ -814,6 +838,7 @@ export interface RootRouteChildren {
   ApiChatRoute: typeof ApiChatRoute
   ApiJobsRoute: typeof ApiJobsRouteWithChildren
   ApiPromptsRoute: typeof ApiPromptsRouteWithChildren
+  ApiSystemHealthRoute: typeof ApiSystemHealthRoute
   ApiToolsRoute: typeof ApiToolsRouteWithChildren
   ApiAiChatRoute: typeof ApiAiChatRoute
   ApiAnalyticsOverviewRoute: typeof ApiAnalyticsOverviewRoute
@@ -953,6 +978,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ConsoleIntegrationsRouteImport
       parentRoute: typeof ConsoleRoute
     }
+    '/console/health': {
+      id: '/console/health'
+      path: '/health'
+      fullPath: '/console/health'
+      preLoaderRoute: typeof ConsoleHealthRouteImport
+      parentRoute: typeof ConsoleRoute
+    }
     '/console/gdrive': {
       id: '/console/gdrive'
       path: '/gdrive'
@@ -986,6 +1018,13 @@ declare module '@tanstack/react-router' {
       path: '/api/tools'
       fullPath: '/api/tools'
       preLoaderRoute: typeof ApiToolsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/system-health': {
+      id: '/api/system-health'
+      path: '/api/system-health'
+      fullPath: '/api/system-health'
+      preLoaderRoute: typeof ApiSystemHealthRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/prompts': {
@@ -1319,6 +1358,7 @@ interface ConsoleRouteChildren {
   ConsoleChatRoute: typeof ConsoleChatRoute
   ConsoleDataRoute: typeof ConsoleDataRoute
   ConsoleGdriveRoute: typeof ConsoleGdriveRoute
+  ConsoleHealthRoute: typeof ConsoleHealthRoute
   ConsoleIntegrationsRoute: typeof ConsoleIntegrationsRoute
   ConsoleJobsRoute: typeof ConsoleJobsRoute
   ConsoleKnowledgeRoute: typeof ConsoleKnowledgeRoute
@@ -1341,6 +1381,7 @@ const ConsoleRouteChildren: ConsoleRouteChildren = {
   ConsoleChatRoute: ConsoleChatRoute,
   ConsoleDataRoute: ConsoleDataRoute,
   ConsoleGdriveRoute: ConsoleGdriveRoute,
+  ConsoleHealthRoute: ConsoleHealthRoute,
   ConsoleIntegrationsRoute: ConsoleIntegrationsRoute,
   ConsoleJobsRoute: ConsoleJobsRoute,
   ConsoleKnowledgeRoute: ConsoleKnowledgeRoute,
@@ -1472,6 +1513,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiChatRoute: ApiChatRoute,
   ApiJobsRoute: ApiJobsRouteWithChildren,
   ApiPromptsRoute: ApiPromptsRouteWithChildren,
+  ApiSystemHealthRoute: ApiSystemHealthRoute,
   ApiToolsRoute: ApiToolsRouteWithChildren,
   ApiAiChatRoute: ApiAiChatRoute,
   ApiAnalyticsOverviewRoute: ApiAnalyticsOverviewRoute,
@@ -1499,3 +1541,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
